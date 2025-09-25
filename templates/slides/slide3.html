@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Cumprimentos & Apresentações{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-hand-wave"></i> Cumprimentos & Apresentações</h2>
+<p style="margin-bottom: 1rem;">Clique nos cartões para ouvir a pronúncia:</p>
+<div class="vocabulary-grid">
+    <div class="vocab-card" onclick="speakText('Hello, nice to meet you')">
+        <div class="vocab-word">Hello / Hi</div>
+        <div class="vocab-meaning">Olá / Oi</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Good morning')">
+        <div class="vocab-word">Good morning</div>
+        <div class="vocab-meaning">Bom dia</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Good afternoon')">
+        <div class="vocab-word">Good afternoon</div>
+        <div class="vocab-meaning">Boa tarde</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Good evening')">
+        <div class="vocab-word">Good evening</div>
+        <div class="vocab-meaning">Boa noite</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Nice to meet you')">
+        <div class="vocab-word">Nice to meet you</div>
+        <div class="vocab-meaning">Prazer em conhecê-lo</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('How are you?')">
+        <div class="vocab-word">How are you?</div>
+        <div class="vocab-meaning">Como você está?</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aprenda Inglês Online{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/presentation.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-counter {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .slides-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 1;
+            transform: translateX(0);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-content {
+            max-width: 900px;
+            text-align: center;
+            color: white;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #FFD700;
+            animation: slideInUp 1s ease-out 0.5s both;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #87CEEB;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            animation: slideInUp 1s ease-out 0.7s both;
+        }
+
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: slideInUp 1s ease-out 0.9s both;
+        }
+
+        .vocab-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .vocab-word {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-meaning {
+            font-size: 1rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 1s ease-out 0.8s both;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .option.correct {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.2);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.8);
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grammar-example {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #FFD700;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .example-sentence {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-translation {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .interactive-exercise {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            animation: slideInUp 1s ease-out 0.7s both;
+        }
+
+        .drag-drop-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .draggable-word {
+            background: rgba(255, 215, 0, 0.8);
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.3s ease;
+            touch-action: none;
+            position: relative;
+        }
+
+        .draggable-word:hover {
+            transform: scale(1.05);
+        }
+
+        .draggable-word:active,
+        .draggable-word.dragging {
+            cursor: grabbing;
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            min-height: 60px;
+            border-radius: 10px;
+            margin: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: rgba(255, 215, 0, 0.8);
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .slide h3 {
+                font-size: 1.5rem;
+            }
+            
+            .slide p {
+                font-size: 1rem;
+            }
+            
+            .vocabulary-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .controls {
+                bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-globe"></i>
+                Aprenda Inglês Online
+            </div>
+            <div class="slide-counter">
+                <span id="current-slide">{{ current_slide }}</span> / <span id="total-slides">10</span>
+            </div>
+        </header>
+
+        <div class="slides-container" id="slides-container">
+            <div class="slide active">
+                <div class="slide-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            {% if prev_slide %}
+            <a href="{{ url_for('slide', slide_number=prev_slide) }}" class="control-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            {% else %}
+            <div class="control-btn" style="opacity: 0.5; cursor: not-allowed;">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            {% endif %}
+
+            <a href="{{ url_for('slide', slide_number=1) }}" class="control-btn">
+                <i class="fas fa-home"></i>
+            </a>
+
+            {% if next_slide %}
+            <a href="{{ url_for('slide', slide_number=next_slide) }}" class="control-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            {% else %}
+            <div class="control-btn" style="opacity: 0.5; cursor: not-allowed;">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="progress-bar" id="progress-bar" style="width: {{ (current_slide / 10 * 100) }}%;"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/presentation.js') }}"></script>
+    <script>
+        // Text-to-speech function
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Quiz functionality
+        function selectAnswer(element, isCorrect) {
+            const options = element.parentNode.querySelectorAll('.option');
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+                if (option === element) {
+                    option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                } else if (option.onclick && option.onclick.toString().includes('true')) {
+                    option.classList.add('correct');
+                }
+            });
+        }
+
+        // Recording functionality
+        function startRecording() {
+            alert('Ótimo! Em uma aplicação real, isso iniciaria a gravação de voz. Por enquanto, pratique falando o diálogo em voz alta!');
+        }
+
+        // Reset presentation
+        function resetPresentation() {
+            window.location.href = "{{ url_for('slide', slide_number=1) }}";
+        }
+
+        {% block scripts %}{% endblock %}
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Exercício Interativo{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-puzzle-piece"></i> Exercício Interativo</h2>
+<div class="interactive-exercise">
+    <h3>Complete a frase:</h3>
+    <p style="font-size: 1.1rem; margin: 0.5rem 0; color: #87CEEB;">
+        Arraste a palavra correta para completar a frase em inglês:
+    </p>
+    <p style="font-size: 1.3rem; margin: 1rem 0;">
+        "She _____ to school every day."
+    </p>
+    
+    <div class="drag-drop-area">
+        <div class="draggable-word" draggable="true" data-word="goes">goes</div>
+        <div class="draggable-word" draggable="true" data-word="go">go</div>
+        <div class="draggable-word" draggable="true" data-word="went">went</div>
+    </div>
+    
+    <div class="drop-zone" id="answer-zone">
+        Arraste a resposta correta aqui
+    </div>
+    
+    <div id="feedback" style="margin-top: 1rem; font-weight: 600;"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+// Drag and drop functionality
+function setupDragAndDrop() {
+    const draggables = document.querySelectorAll('.draggable-word');
+    const dropZone = document.getElementById('answer-zone');
+    
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', e.target.dataset.word);
+        });
+    });
+    
+    if (dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'rgba(255, 215, 0, 0.8)';
+            dropZone.style.background = 'rgba(255, 215, 0, 0.1)';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            dropZone.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+            dropZone.style.background = 'transparent';
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const word = e.dataTransfer.getData('text/plain');
+            handleWordDrop(word, dropZone);
+        });
+    }
+}
+
+function handleWordDrop(word, dropZone) {
+    const feedback = document.getElementById('feedback');
+    
+    if (word === 'goes') {
+        dropZone.innerHTML = '<strong style="color: #4CAF50; font-size: 1.2rem;">goes ✓</strong>';
+        feedback.innerHTML = '<span style="color: #4CAF50; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Excelente! Gramática perfeita!</span>';
+        feedback.style.animation = 'slideInUp 0.6s ease-out';
+    } else {
+        dropZone.innerHTML = '<strong style="color: #f44336; font-size: 1.2rem;">' + word + ' ✗</strong>';
+        feedback.innerHTML = '<span style="color: #f44336; font-size: 1.1rem;"><i class="fas fa-times-circle"></i> Tente novamente! Lembre-se: she/he/it + verbo + s</span>';
+        feedback.style.animation = 'shake 0.5s ease-out';
+    }
+}
+
+// Initialize drag and drop when page loads
+document.addEventListener('DOMContentLoaded', setupDragAndDrop);
+{% endblock %}

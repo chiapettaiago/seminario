@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Frases Essenciais{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-comments"></i> Frases Essenciais</h2>
+<p style="margin-bottom: 1rem;">Clique nos cartões para ouvir a pronúncia:</p>
+<div class="vocabulary-grid">
+    <div class="vocab-card" onclick="speakText('Excuse me')">
+        <div class="vocab-word">Excuse me</div>
+        <div class="vocab-meaning">Com licença</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Thank you')">
+        <div class="vocab-word">Thank you</div>
+        <div class="vocab-meaning">Obrigado(a)</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('You are welcome')">
+        <div class="vocab-word">You're welcome</div>
+        <div class="vocab-meaning">De nada</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('I am sorry')">
+        <div class="vocab-word">I'm sorry</div>
+        <div class="vocab-meaning">Desculpe</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('Could you help me?')">
+        <div class="vocab-word">Could you help me?</div>
+        <div class="vocab-meaning">Você poderia me ajudar?</div>
+    </div>
+    <div class="vocab-card" onclick="speakText('I do not understand')">
+        <div class="vocab-word">I don't understand</div>
+        <div class="vocab-meaning">Eu não entendo</div>
+    </div>
+</div>
+{% endblock %}

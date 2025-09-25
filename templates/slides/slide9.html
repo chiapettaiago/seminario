@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Prática de Conversação{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-user-friends"></i> Prática de Conversação</h2>
+<div style="max-width: 700px;">
+    <div class="grammar-example">
+        <h3 style="color: #87CEEB; margin-bottom: 1rem;">Diálogo de Exemplo</h3>
+        <div style="text-align: left; line-height: 2;">
+            <div><strong style="color: #FFD700;">Pessoa A:</strong> "Hello! How are you?"</div>
+            <div><strong style="color: #87CEEB;">Pessoa B:</strong> "Hi! I'm fine, thank you. And you?"</div>
+            <div><strong style="color: #FFD700;">Pessoa A:</strong> "I'm good too. Nice to meet you!"</div>
+            <div><strong style="color: #87CEEB;">Pessoa B:</strong> "Nice to meet you too!"</div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+        <h3><i class="fas fa-microphone"></i> Sua Vez!</h3>
+        <p>Tente praticar esta conversa com um parceiro ou fale em voz alta sozinho.</p>
+        <button onclick="startRecording()" style="margin-top: 1rem; background: #FFD700; color: #333; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">
+            <i class="fas fa-microphone"></i> Praticar Fala
+        </button>
+    </div>
+</div>
+{% endblock %}

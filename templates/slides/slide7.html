@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Rápido{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-question-circle"></i> Quiz Rápido</h2>
+<div class="quiz-container">
+    <div class="question">
+        Qual é a forma correta de cumprimentar alguém pela manhã?
+        <p style="font-size: 0.9rem; color: #87CEEB; margin-top: 0.5rem;">
+            (What is the correct way to greet someone in the morning?)
+        </p>
+    </div>
+    <div class="options">
+        <div class="option" onclick="selectAnswer(this, false)">Good night</div>
+        <div class="option" onclick="selectAnswer(this, true)">Good morning</div>
+        <div class="option" onclick="selectAnswer(this, false)">Good afternoon</div>
+        <div class="option" onclick="selectAnswer(this, false)">Goodbye</div>
+    </div>
+</div>
+{% endblock %}

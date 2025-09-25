@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Números & Horas{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-clock"></i> Números & Horas</h2>
+<p style="margin-bottom: 1rem;">Clique para ouvir a pronúncia dos números e expressões de tempo:</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px;">
+    <div>
+        <h3>Números 1-10</h3>
+        <div style="display: grid; gap: 0.5rem; text-align: left;">
+            <div onclick="speakText('one')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">1 - One</div>
+            <div onclick="speakText('two')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">2 - Two</div>
+            <div onclick="speakText('three')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">3 - Three</div>
+            <div onclick="speakText('four')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">4 - Four</div>
+            <div onclick="speakText('five')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">5 - Five</div>
+            <div onclick="speakText('six')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">6 - Six</div>
+            <div onclick="speakText('seven')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">7 - Seven</div>
+            <div onclick="speakText('eight')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">8 - Eight</div>
+            <div onclick="speakText('nine')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">9 - Nine</div>
+            <div onclick="speakText('ten')" style="cursor: pointer; padding: 0.5rem; border-radius: 5px; background: rgba(255,255,255,0.1); margin: 0.2rem 0;">10 - Ten</div>
+        </div>
+    </div>
+    <div>
+        <h3>Expressões de Tempo</h3>
+        <div class="vocabulary-grid" style="grid-template-columns: 1fr;">
+            <div class="vocab-card" onclick="speakText('What time is it?')">
+                <div class="vocab-word">What time is it?</div>
+                <div class="vocab-meaning">Que horas são?</div>
+            </div>
+            <div class="vocab-card" onclick="speakText('It is three o clock')">
+                <div class="vocab-word">It's 3 o'clock</div>
+                <div class="vocab-meaning">São 3 horas</div>
+            </div>
+            <div class="vocab-card" onclick="speakText('Half past two')">
+                <div class="vocab-word">Half past two</div>
+                <div class="vocab-meaning">Duas e meia</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

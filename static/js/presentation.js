@@ -1,80 +1,116 @@
-// Additional JavaScript functionality for future enhancements
+// Presentation Manager for Multi-page slides
 class PresentationManager {
     constructor() {
-        this.touchStartX = 0;
-        this.touchEndX = 0;
         this.setupTouchEvents();
-        this.setupFullscreenToggle();
+        this.setupKeyboardNavigation();
+        this.setupAnimations();
     }
 
     // Touch/swipe support for mobile devices
     setupTouchEvents() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        
         document.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.changedTouches[0].screenX;
-        });
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
 
         document.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].screenX;
-            this.handleSwipe();
-        });
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            this.handleSwipe(touchStartX, touchEndX, touchStartY, touchEndY);
+        }, { passive: true });
     }
 
-    handleSwipe() {
+    handleSwipe(startX, endX, startY, endY) {
         const swipeThreshold = 50;
-        const swipeDistance = this.touchEndX - this.touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                previousSlide();
+        const swipeDistanceX = endX - startX;
+        const swipeDistanceY = Math.abs(endY - startY);
+        
+        // Only trigger if horizontal swipe is longer than vertical
+        if (Math.abs(swipeDistanceX) > swipeThreshold && swipeDistanceY < 100) {
+            if (swipeDistanceX > 0) {
+                // Swipe right - go to previous slide
+                this.navigateToPreviousSlide();
             } else {
-                nextSlide();
+                // Swipe left - go to next slide
+                this.navigateToNextSlide();
             }
         }
     }
 
-    // Fullscreen toggle
-    setupFullscreenToggle() {
+    setupKeyboardNavigation() {
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'F11') {
-                e.preventDefault();
-                this.toggleFullscreen();
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    this.navigateToNextSlide();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    this.navigateToPreviousSlide();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    window.location.href = '/slide/1';
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    window.location.href = '/slide/10';
+                    break;
             }
         });
     }
 
-    toggleFullscreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(err => {
-                console.log(`Error attempting to enable fullscreen: ${err.message}`);
-            });
-        } else {
-            document.exitFullscreen();
+    navigateToNextSlide() {
+        const nextBtn = document.getElementById('next-btn');
+        if (nextBtn && nextBtn.href) {
+            window.location.href = nextBtn.href;
         }
     }
 
-    // Save presentation progress
+    navigateToPreviousSlide() {
+        const prevBtn = document.getElementById('prev-btn');
+        if (prevBtn && prevBtn.href) {
+            window.location.href = prevBtn.href;
+        }
+    }
+
+    setupAnimations() {
+        // Add entrance animations to elements
+        const animatedElements = document.querySelectorAll('.slide-content > *');
+        animatedElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    }
+
+    // Save and load progress
     saveProgress() {
+        const currentSlide = document.getElementById('current-slide').textContent;
         localStorage.setItem('presentationProgress', currentSlide);
     }
 
-    // Load presentation progress
     loadProgress() {
         const savedSlide = localStorage.getItem('presentationProgress');
-        if (savedSlide !== null) {
-            goToSlide(parseInt(savedSlide));
+        if (savedSlide && savedSlide !== '1') {
+            const confirmResume = confirm(`Continuar do slide ${savedSlide}?`);
+            if (confirmResume) {
+                window.location.href = `/slide/${savedSlide}`;
+            }
         }
     }
 }
-
-// Initialize presentation manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const presentationManager = new PresentationManager();
-    
-    // Auto-save progress
-    setInterval(() => {
-        presentationManager.saveProgress();
-    }, 5000);
-});
 
 // Enhanced audio pronunciation with different voices
 function speakTextWithVoice(text, voiceIndex = 0) {
@@ -97,32 +133,17 @@ function speakTextWithVoice(text, voiceIndex = 0) {
     }
 }
 
-// Quiz tracking system
-class QuizTracker {
-    constructor() {
-        this.scores = {
-            correct: 0,
-            total: 0
-        };
+// Initialize presentation manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const presentationManager = new PresentationManager();
+    
+    // Auto-save progress every 5 seconds
+    setInterval(() => {
+        presentationManager.saveProgress();
+    }, 5000);
+    
+    // Load progress on first visit
+    if (window.location.pathname === '/' || window.location.pathname === '/slide/1') {
+        presentationManager.loadProgress();
     }
-
-    recordAnswer(isCorrect) {
-        this.scores.total++;
-        if (isCorrect) {
-            this.scores.correct++;
-        }
-        this.updateScore();
-    }
-
-    updateScore() {
-        const percentage = (this.scores.correct / this.scores.total * 100).toFixed(1);
-        console.log(`Quiz Score: ${this.scores.correct}/${this.scores.total} (${percentage}%)`);
-    }
-
-    getScore() {
-        return this.scores;
-    }
-}
-
-// Initialize quiz tracker
-const quizTracker = new QuizTracker();
+});
