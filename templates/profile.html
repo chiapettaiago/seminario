@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil - Aprenda Inglês Online{% endblock %}
+
+{% block content %}
+<h1><i class="fas fa-user"></i> Meu Perfil</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1000px;">
+    <!-- Informações Pessoais -->
+    <div class="vocab-card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="background: linear-gradient(45deg, #FFD700, #FFA500); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem; color: #333;">
+                <i class="fas fa-user"></i>
+            </div>
+            <h2 style="color: #FFD700; margin-bottom: 0.5rem;">{{ user.name }}</h2>
+            <p style="color: #87CEEB; font-size: 1.1rem;">Nível: {{ user.level }}</p>
+        </div>
+        
+        <div style="display: grid; gap: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <span><i class="fas fa-graduation-cap" style="margin-right: 0.5rem; color: #4CAF50;"></i>Cursos Completos</span>
+                <strong>{{ user.courses_completed }}</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <span><i class="fas fa-clock" style="margin-right: 0.5rem; color: #87CEEB;"></i>Tempo Total</span>
+                <strong>{{ user.total_study_time }}</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                <span><i class="fas fa-fire" style="margin-right: 0.5rem; color: #FF6B35;"></i>Sequência</span>
+                <strong>{{ user.streak_days }} dia(s)</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tópicos Favoritos -->
+    <div class="vocab-card">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;">
+            <i class="fas fa-heart"></i> Tópicos Favoritos
+        </h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            {% for topic in user.favorite_topics %}
+            <span style="background: rgba(255, 215, 0, 0.2); color: #FFD700; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(255, 215, 0, 0.3);">
+                {{ topic }}
+            </span>
+            {% endfor %}
+        </div>
+        
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(135, 206, 235, 0.1); border-radius: 10px; border-left: 4px solid #87CEEB;">
+            <h4 style="color: #87CEEB; margin-bottom: 0.5rem;">
+                <i class="fas fa-target"></i> Próxima Meta
+            </h4>
+            <p>{{ user.next_goal }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Ações -->
+<div style="margin-top: 2rem; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px;">
+    <h3 style="text-align: center; margin-bottom: 1.5rem; color: #FFD700;">
+        <i class="fas fa-rocket"></i> Continue Aprendendo
+    </h3>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ url_for('slide', slide_number=1) }}" style="background: #4CAF50; color: white; padding: 1rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-play"></i> Continuar Estudos
+        </a>
+        <a href="{{ url_for('lessons') }}" style="background: #87CEEB; color: #333; padding: 1rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-list"></i> Explorar Lições
+        </a>
+        <a href="{{ url_for('progress') }}" style="background: #FFD700; color: #333; padding: 1rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-chart-bar"></i> Ver Progresso
+        </a>
+    </div>
+</div>
+
+<!-- Dicas de Estudo -->
+<div style="margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <div style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(135, 206, 235, 0.1)); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255, 215, 0, 0.2);">
+        <h4 style="color: #FFD700; margin-bottom: 1rem; text-align: center;">
+            <i class="fas fa-lightbulb"></i> Dica de Hoje
+        </h4>
+        <p style="text-align: center; font-style: italic;">
+            "Pratique inglês por pelo menos 15 minutos todos os dias. A consistência é mais importante que a duração!"
+        </p>
+    </div>
+</div>
+{% endblock %}

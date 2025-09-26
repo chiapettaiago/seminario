@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Progresso - Aprenda Inglês Online{% endblock %}
+
+{% block content %}
+<h1><i class="fas fa-chart-line"></i> Meu Progresso</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px;">
+    <!-- Progresso Geral -->
+    <div class="vocab-card" style="text-align: center;">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;">
+            <i class="fas fa-trophy"></i> Progresso Geral
+        </h3>
+        <div style="margin: 1rem 0;">
+            <div style="background: rgba(255, 215, 0, 0.2); border-radius: 20px; height: 20px; position: relative; margin-bottom: 0.5rem;">
+                <div style="background: #FFD700; height: 100%; border-radius: 20px; width: {{ progress.completion_percentage }}%; transition: width 0.5s ease;"></div>
+            </div>
+            <span style="font-size: 1.2rem; font-weight: bold;">{{ progress.completion_percentage }}% Completo</span>
+        </div>
+        <p>{{ progress.completed_slides }}/{{ progress.total_slides }} lições concluídas</p>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="vocab-card">
+        <h3 style="color: #87CEEB; margin-bottom: 1rem;">
+            <i class="fas fa-clock"></i> Estatísticas
+        </h3>
+        <div style="display: grid; gap: 0.8rem;">
+            <div style="display: flex; justify-content: space-between;">
+                <span>Tempo de Estudo:</span>
+                <strong>{{ progress.time_spent }}</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>Pontuação Quiz:</span>
+                <strong>{{ progress.quiz_score }}</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>Vocabulário Aprendido:</span>
+                <strong>{{ progress.vocabulary_learned }} palavras</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conquistas -->
+    <div class="vocab-card" style="grid-column: 1 / -1;">
+        <h3 style="color: #4CAF50; margin-bottom: 1rem;">
+            <i class="fas fa-medal"></i> Conquistas Desbloqueadas
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            {% for achievement in progress.achievements %}
+            <div style="background: rgba(76, 175, 80, 0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(76, 175, 80, 0.3);">
+                <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 0.5rem;"></i>
+                {{ achievement }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 2rem; text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <a href="{{ url_for('lessons') }}" style="background: #87CEEB; color: #333; padding: 1rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600;">
+        <i class="fas fa-book"></i> Ver Todas as Lições
+    </a>
+    <a href="{{ url_for('slide', slide_number=1) }}" style="background: #FFD700; color: #333; padding: 1rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600;">
+        <i class="fas fa-redo"></i> Revisar Curso
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Todas as Lições - Aprenda Inglês Online{% endblock %}
+
+{% block content %}
+<h1><i class="fas fa-book"></i> Todas as Lições</h1>
+<p style="margin-bottom: 2rem; font-size: 1.1rem;">Escolha uma lição para começar ou continuar seus estudos:</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; max-width: 1000px;">
+    {% for lesson in lessons %}
+    <div class="vocab-card" style="text-align: left; cursor: pointer;" onclick="window.location.href='{{ url_for('slide', slide_number=lesson.number) }}'">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <div style="background: #FFD700; color: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                {{ lesson.number }}
+            </div>
+            <div>
+                <div class="vocab-word" style="margin-bottom: 0.2rem;">{{ lesson.title }}</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">{{ lesson.description }}</div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.85rem; color: #87CEEB;">
+                <i class="fas fa-play"></i> Iniciar Lição
+            </span>
+            {% if lesson.number <= 10 %}
+            <span style="color: #4CAF50;">
+                <i class="fas fa-check-circle"></i> Disponível
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div style="margin-top: 2rem; text-align: center;">
+    <a href="{{ url_for('slide', slide_number=1) }}" style="background: #FFD700; color: #333; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block;">
+        <i class="fas fa-play"></i> Começar do Início
+    </a>
+</div>
+{% endblock %}

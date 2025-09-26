@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Aprenda Inglês Online{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 0 auto;">
+    <h1><i class="fas fa-sign-in-alt"></i> Entrar</h1>
+    <p style="margin-bottom: 2rem; opacity: 0.9;">Faça login para acessar seu progresso e personalizar sua experiência de aprendizado.</p>
+
+    <!-- Mensagens Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div style="margin-bottom: 1rem; padding: 1rem; border-radius: 8px; {% if category == 'error' %}background: rgba(244, 67, 54, 0.1); border: 1px solid rgba(244, 67, 54, 0.3); color: #f44336;{% elif category == 'success' %}background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); color: #4CAF50;{% else %}background: rgba(33, 150, 243, 0.1); border: 1px solid rgba(33, 150, 243, 0.3); color: #2196F3;{% endif %}">
+                    <i class="fas {% if category == 'error' %}fa-exclamation-circle{% elif category == 'success' %}fa-check-circle{% else %}fa-info-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 1.5rem;">
+            <label for="username" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-user"></i> Nome de Usuário
+            </label>
+            <input type="text" id="username" name="username" required 
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="Digite seu nome de usuário">
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-lock"></i> Senha
+            </label>
+            <input type="password" id="password" name="password" required 
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="Digite sua senha">
+        </div>
+
+        <button type="submit" style="width: 100%; background: #4CAF50; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; transition: all 0.3s ease;">
+            <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p style="margin-bottom: 1rem;">Não tem uma conta?</p>
+            <a href="{{ url_for('register') }}" style="background: #FFD700; color: #333; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
+                <i class="fas fa-user-plus"></i> Criar Conta
+            </a>
+        </div>
+    </form>
+
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="{{ url_for('slide', slide_number=1) }}" style="color: #87CEEB; text-decoration: none; opacity: 0.8;">
+            <i class="fas fa-arrow-left"></i> Continuar sem login
+        </a>
+    </div>
+</div>
+
+<style>
+    input:focus {
+        outline: none;
+        border-color: #FFD700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+    }
+    
+    button:hover {
+        background: #45a049 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    a:hover {
+        transform: translateY(-1px);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar - Aprenda Inglês Online{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 0 auto;">
+    <h1><i class="fas fa-user-plus"></i> Criar Conta</h1>
+    <p style="margin-bottom: 2rem; opacity: 0.9;">Crie sua conta para salvar seu progresso e ter acesso completo ao curso.</p>
+
+    <!-- Mensagens Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div style="margin-bottom: 1rem; padding: 1rem; border-radius: 8px; background: rgba(244, 67, 54, 0.1); border: 1px solid rgba(244, 67, 54, 0.3); color: #f44336;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 1.5rem;">
+            <label for="username" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-user"></i> Nome de Usuário *
+            </label>
+            <input type="text" id="username" name="username" required minlength="3"
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="Mínimo 3 caracteres">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-envelope"></i> Email *
+            </label>
+            <input type="email" id="email" name="email" required 
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="seu@email.com">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-lock"></i> Senha *
+            </label>
+            <input type="password" id="password" name="password" required minlength="6"
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="Mínimo 6 caracteres">
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <label for="confirm_password" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+                <i class="fas fa-lock"></i> Confirmar Senha *
+            </label>
+            <input type="password" id="confirm_password" name="confirm_password" required 
+                   style="width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white; font-size: 1rem;"
+                   placeholder="Digite a senha novamente">
+        </div>
+
+        <button type="submit" style="width: 100%; background: #4CAF50; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; transition: all 0.3s ease;">
+            <i class="fas fa-user-plus"></i> Criar Conta
+        </button>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p style="margin-bottom: 1rem;">Já tem uma conta?</p>
+            <a href="{{ url_for('login') }}" style="background: #FFD700; color: #333; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
+                <i class="fas fa-sign-in-alt"></i> Fazer Login
+            </a>
+        </div>
+    </form>
+
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="{{ url_for('slide', slide_number=1) }}" style="color: #87CEEB; text-decoration: none; opacity: 0.8;">
+            <i class="fas fa-arrow-left"></i> Continuar sem conta
+        </a>
+    </div>
+</div>
+
+<style>
+    input:focus {
+        outline: none;
+        border-color: #FFD700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+    }
+    
+    button:hover {
+        background: #45a049 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    a:hover {
+        transform: translateY(-1px);
+    }
+</style>
+{% endblock %}
