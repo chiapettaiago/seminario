@@ -1,7 +1,12 @@
 from flask import render_template, redirect, url_for, session, request, flash
-from routes.auth import login_required, get_user_data, update_user_progress, load_users, save_users
+from routes.auth import (
+    login_required,
+    get_user_data,
+    update_user_progress,
+    get_user_by_username,
+    create_user,
+)
 import hashlib
-from datetime import datetime
 
 def main():
     # Redireciona para o primeiro slide
@@ -67,12 +72,16 @@ def login():
         username = request.form['username'].lower().strip()
         password = request.form['password']
         
-        users = load_users()
-        
         # Hash da senha para comparação
         password_hash = hashlib.sha256(password.encode()).hexdigest()
-        
-        if username in users and users[username]['password'] == password_hash:
+
+        try:
+            user_record = get_user_by_username(username)
+        except RuntimeError:
+            flash('Não foi possível acessar o banco de dados. Tente novamente mais tarde.', 'error')
+            return render_template('login.html')
+
+        if user_record and user_record['password'] == password_hash:
             session['user'] = username
             flash(f'Bem-vindo(a), {username.title()}!', 'success')
             
@@ -107,22 +116,25 @@ def register():
             flash('Senhas não coincidem.', 'error')
             return render_template('register.html')
         
-        users = load_users()
-        
-        if username in users:
+        try:
+            existing_user = get_user_by_username(username)
+        except RuntimeError:
+            flash('Não foi possível acessar o banco de dados. Tente novamente mais tarde.', 'error')
+            return render_template('register.html')
+
+        if existing_user:
             flash('Nome de usuário já existe.', 'error')
             return render_template('register.html')
-        
+
         # Criar novo usuário
         password_hash = hashlib.sha256(password.encode()).hexdigest()
-        users[username] = {
-            'password': password_hash,
-            'email': email,
-            'created_at': str(datetime.now())
-        }
-        
-        save_users(users)
-        
+
+        try:
+            create_user(username, password_hash, email)
+        except RuntimeError as exc:
+            flash(str(exc), 'error')
+            return render_template('register.html')
+
         # Login automático
         session['user'] = username
         flash(f'Conta criada com sucesso! Bem-vindo(a), {username.title()}!', 'success')

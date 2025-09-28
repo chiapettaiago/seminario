@@ -1,1 +1,15 @@
-{}
+{
+  "chiapettaiago": {
+    "completed_slides": [
+      1
+    ],
+    "quiz_scores": {},
+    "time_spent": 5,
+    "vocabulary_learned": 0,
+    "achievements": [
+      "Primeiro Slide Completado"
+    ],
+    "last_slide": 1,
+    "study_streak": 1
+  }
+}

@@ -19,8 +19,8 @@
 
     <div class="interactive-exercise" style="background: #252830; color: #f7f9fc;">
         <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-puzzle-piece"></i> Complete as frases no Simple Past:</h3>
-        <p style="font-size: 1rem; margin: 1rem 0; color: #87CEEB;">
-            <i class="fas fa-hand-point-right"></i> Arraste a forma correta do verbo para completar cada frase:
+        <p style="font-size: 1rem; margin: 1rem 0; color: #87CEEB;" id="exercise-instructions">
+            <i class="fas fa-hand-point-right"></i> <span class="desktop-instruction">Arraste a forma correta do verbo para completar cada frase:</span><span class="mobile-instruction" style="display: none;"><strong>Mobile:</strong> Toque na palavra, depois toque na área de resposta. Ou arraste diretamente!</span>
         </p>
         
         <!-- Exercício 1 -->
@@ -99,24 +99,145 @@
 {% endblock %}
 
 {% block scripts %}
-// Drag and drop functionality for Simple Past exercise
+// Enhanced drag and drop functionality with mobile touch support for Simple Past exercise
 function setupDragAndDrop() {
     const draggables = document.querySelectorAll('.draggable-word');
     const dropZones = document.querySelectorAll('.drop-zone');
+    let draggedElement = null;
+    let touchOffset = { x: 0, y: 0 };
+    let isDragging = false;
+    
+    // Detect if device supports touch
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     draggables.forEach(draggable => {
+        // Desktop drag events
         draggable.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', e.target.dataset.word);
             e.dataTransfer.setData('exercise', e.target.dataset.exercise);
-            e.target.style.opacity = '0.5';
+            e.target.style.opacity = '0.6';
+            e.target.classList.add('dragging');
+            draggedElement = e.target;
         });
         
         draggable.addEventListener('dragend', (e) => {
             e.target.style.opacity = '1';
+            e.target.classList.remove('dragging');
+            draggedElement = null;
+        });
+        
+        // Mobile touch events
+        if (isTouchDevice) {
+            draggable.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isDragging = true;
+                draggedElement = e.target;
+                
+                const touch = e.touches[0];
+                const rect = e.target.getBoundingClientRect();
+                touchOffset.x = touch.clientX - rect.left;
+                touchOffset.y = touch.clientY - rect.top;
+                
+                // Visual feedback
+                e.target.style.opacity = '0.8';
+                e.target.classList.add('dragging');
+                e.target.style.zIndex = '1000';
+                e.target.style.position = 'relative';
+                
+                // Add vibration feedback if available
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            }, { passive: false });
+            
+            draggable.addEventListener('touchmove', (e) => {
+                if (!isDragging || !draggedElement) return;
+                e.preventDefault();
+                
+                const touch = e.touches[0];
+                const x = touch.clientX - touchOffset.x;
+                const y = touch.clientY - touchOffset.y;
+                
+                // Move the element
+                draggedElement.style.transform = `translate(${x - draggedElement.offsetLeft}px, ${y - draggedElement.offsetTop}px) scale(1.1)`;
+                
+                // Check if over drop zone
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow?.closest('.drop-zone');
+                
+                // Remove previous hover states
+                dropZones.forEach(zone => zone.classList.remove('drag-over'));
+                
+                if (dropZone) {
+                    dropZone.classList.add('drag-over');
+                }
+            }, { passive: false });
+            
+            draggable.addEventListener('touchend', (e) => {
+                if (!isDragging || !draggedElement) return;
+                e.preventDefault();
+                
+                const touch = e.changedTouches[0];
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow?.closest('.drop-zone');
+                
+                // Reset element position and style
+                draggedElement.style.transform = '';
+                draggedElement.style.opacity = '1';
+                draggedElement.style.zIndex = '';
+                draggedElement.style.position = '';
+                draggedElement.classList.remove('dragging');
+                
+                // Remove hover states
+                dropZones.forEach(zone => zone.classList.remove('drag-over'));
+                
+                if (dropZone) {
+                    const word = draggedElement.dataset.word;
+                    const exercise = draggedElement.dataset.exercise;
+                    const dropZoneId = dropZone.id;
+                    const expectedExercise = dropZoneId.split('-')[2];
+                    
+                    if (exercise === expectedExercise) {
+                        handleWordDrop(word, dropZone);
+                        
+                        // Success vibration
+                        if (navigator.vibrate) {
+                            navigator.vibrate([100, 50, 100]);
+                        }
+                    }
+                }
+                
+                isDragging = false;
+                draggedElement = null;
+            }, { passive: false });
+        }
+        
+        // Click/tap alternative for mobile
+        draggable.addEventListener('click', function() {
+            if (isTouchDevice) {
+                this.classList.add('selected');
+                
+                // Remove selection from other words in the same exercise
+                const exerciseNum = this.dataset.exercise;
+                const otherWords = document.querySelectorAll(`[data-exercise="${exerciseNum}"]`);
+                otherWords.forEach(word => {
+                    if (word !== this) {
+                        word.classList.remove('selected');
+                    }
+                });
+                
+                // Update drop zone text to show it's ready for selection
+                const dropZone = document.getElementById(`answer-zone-${exerciseNum}`);
+                if (dropZone && !dropZone.innerHTML.includes('✓') && !dropZone.innerHTML.includes('✗')) {
+                    dropZone.innerHTML = `Toque aqui para usar "${this.dataset.word}"`;
+                    dropZone.dataset.pendingWord = this.dataset.word;
+                }
+            }
         });
     });
     
     dropZones.forEach(dropZone => {
+        // Desktop drop events
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.classList.add('drag-over');
@@ -131,13 +252,31 @@ function setupDragAndDrop() {
             const word = e.dataTransfer.getData('text/plain');
             const exercise = e.dataTransfer.getData('exercise');
             const dropZoneId = dropZone.id;
-            const expectedExercise = dropZoneId.split('-')[2]; // gets "1", "2", or "3"
+            const expectedExercise = dropZoneId.split('-')[2];
             
             if (exercise === expectedExercise) {
                 handleWordDrop(word, dropZone);
             }
             dropZone.classList.remove('drag-over');
         });
+        
+        // Mobile tap alternative
+        if (isTouchDevice) {
+            dropZone.addEventListener('click', function() {
+                const pendingWord = this.dataset.pendingWord;
+                if (pendingWord) {
+                    handleWordDrop(pendingWord, this);
+                    this.removeAttribute('data-pending-word');
+                    
+                    // Clear selection
+                    const exerciseNum = this.id.split('-')[2];
+                    const selectedWord = document.querySelector(`[data-exercise="${exerciseNum}"].selected`);
+                    if (selectedWord) {
+                        selectedWord.classList.remove('selected');
+                    }
+                }
+            });
+        }
     });
 }
 
@@ -148,6 +287,7 @@ function handleWordDrop(word, dropZone) {
     
     if (word === correctAnswer) {
         dropZone.innerHTML = `<strong style="color: #4CAF50; font-size: 1.3rem;">${word} ✓</strong>`;
+        dropZone.classList.add('correct');
         feedback.innerHTML = '<span style="color: #4CAF50; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Perfeito! Você dominou o Simple Past!</span>';
         feedback.style.animation = 'slideInUp 0.6s ease-out';
         
@@ -158,8 +298,12 @@ function handleWordDrop(word, dropZone) {
             utterance.volume = 0.3;
             speechSynthesis.speak(utterance);
         }
+        
+        // Confetti effect for mobile
+        createConfettiEffect(dropZone);
     } else {
         dropZone.innerHTML = `<strong style="color: #f44336; font-size: 1.3rem;">${word} ✗</strong>`;
+        dropZone.classList.add('incorrect');
         
         let hint = '';
         if (exerciseNum === '1') {
@@ -173,25 +317,130 @@ function handleWordDrop(word, dropZone) {
         feedback.innerHTML = `<span style="color: #f44336; font-size: 1rem;"><i class="fas fa-times-circle"></i> Tente novamente! ${hint}</span>`;
         feedback.style.animation = 'shake 0.5s ease-out';
         
-        // Reset drop zone after 2 seconds
+        // Reset drop zone after 3 seconds
         setTimeout(() => {
             dropZone.innerHTML = 'Arraste a resposta aqui';
+            dropZone.classList.remove('incorrect');
             feedback.innerHTML = '';
         }, 3000);
     }
 }
 
-// Add shake animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
+// Confetti effect for success
+function createConfettiEffect(element) {
+    const colors = ['#FFD700', '#FF6B6B', '#4CAF50', '#87CEEB', '#FFA500'];
+    
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                pointer-events: none;
+                z-index: 9999;
+                border-radius: 50%;
+                left: ${element.offsetLeft + element.offsetWidth / 2}px;
+                top: ${element.offsetTop}px;
+                animation: confetti-fall 2s ease-out forwards;
+            `;
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 2000);
+        }, i * 50);
+    }
+}
+
+// Add confetti animation
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+    @keyframes confetti-fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(200px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .draggable-word.selected {
+        background: #FF6B6B !important;
+        color: white !important;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+        .drag-drop-area {
+            margin: 1.5rem 0;
+        }
+        
+        .draggable-word {
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .drop-zone {
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(confettiStyle);
+
+// Add mobile-specific instructions
+function addMobileInstructions() {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouchDevice) {
+        const desktopInstruction = document.querySelector('.desktop-instruction');
+        const mobileInstruction = document.querySelector('.mobile-instruction');
+        
+        if (desktopInstruction && mobileInstruction) {
+            desktopInstruction.style.display = 'none';
+            mobileInstruction.style.display = 'inline';
+        }
+        
+        // Add visual indicator for mobile users
+        const exerciseDiv = document.querySelector('.interactive-exercise');
+        if (exerciseDiv) {
+            const mobileHint = document.createElement('div');
+            mobileHint.innerHTML = `
+                <div style="background: rgba(255, 107, 107, 0.1); border: 2px solid #FF6B6B; border-radius: 12px; padding: 1rem; margin: 1rem 0; text-align: center;">
+                    <p style="margin: 0; color: #FF6B6B; font-weight: 600;">
+                        📱 <strong>Modo Touch Ativado!</strong><br>
+                        <span style="font-size: 0.9rem;">• Toque na palavra para selecioná-la<br>
+                        • Toque na área cinza para colocar a resposta<br>
+                        • Ou arraste diretamente com o dedo</span>
+                    </p>
+                </div>
+            `;
+            exerciseDiv.insertBefore(mobileHint, exerciseDiv.firstChild.nextSibling);
+        }
+    }
+}
 
 // Initialize drag and drop when page loads
-document.addEventListener('DOMContentLoaded', setupDragAndDrop);
+document.addEventListener('DOMContentLoaded', () => {
+    setupDragAndDrop();
+    addMobileInstructions();
+});
 {% endblock %}

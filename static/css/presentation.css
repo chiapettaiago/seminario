@@ -293,6 +293,168 @@
     }
 }
 
+/* Drag and Drop Styles */
+.drag-drop-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 1.2rem 0;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.draggable-word {
+    background: #FFD700;
+    color: #000;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.draggable-word:hover,
+.draggable-word:active {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    background: #FFE55C;
+}
+
+.draggable-word.dragging {
+    opacity: 0.6;
+    transform: scale(1.1) rotate(3deg);
+}
+
+.drop-zone {
+    background: rgba(135, 206, 235, 0.1);
+    border: 3px dashed #87CEEB;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #87CEEB;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.drop-zone.drag-over {
+    background: rgba(135, 206, 235, 0.2);
+    border-color: #4CAF50;
+    color: #4CAF50;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+.drop-zone.correct {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+
+.drop-zone.incorrect {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: #f44336;
+    color: #f44336;
+    animation: shake 0.5s ease-out;
+}
+
+/* Touch-friendly improvements for mobile */
+@media (max-width: 768px) {
+    .drag-drop-area {
+        gap: 0.5rem;
+        padding: 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .draggable-word {
+        padding: 1rem 1.8rem;
+        font-size: 1.2rem;
+        min-width: 120px;
+        text-align: center;
+        border-radius: 30px;
+        margin: 0.3rem;
+    }
+    
+    .drop-zone {
+        padding: 2rem 1rem;
+        min-height: 80px;
+        font-size: 1.2rem;
+        margin: 1.5rem 0;
+        border-width: 4px;
+    }
+    
+    .interactive-exercise {
+        padding: 1rem !important;
+    }
+    
+    /* Adicionar indicadores visuais para touch */
+    .draggable-word::after {
+        content: "👆";
+        position: absolute;
+        top: -10px;
+        right: -5px;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        animation: pulse 2s infinite;
+    }
+}
+
+@media (max-width: 480px) {
+    .draggable-word {
+        padding: 1.2rem 1.5rem;
+        font-size: 1.3rem;
+        width: 100%;
+        max-width: 200px;
+        margin: 0.5rem auto;
+    }
+    
+    .drop-zone {
+        padding: 2.5rem 1rem;
+        min-height: 100px;
+        font-size: 1.3rem;
+        margin: 2rem 0;
+    }
+    
+    .drag-drop-area {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 0.7;
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.2); 
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
 /* Print optimizations */
 @media print {
     .controls, .progress-bar, .header, .mobile-nav-hint, .swipe-indicator {
