@@ -1,34 +1,101 @@
 {% extends "base.html" %}
 
-{% block title %}Cumprimentos & Apresentações{% endblock %}
+{% block title %}Vocabulário Básico & Sistema de        <div class="vocab-card" onclick="speakText('Good afternoon')" data-word="Good afternoon">
+            <div class="vocab-word">Good afternoon</div>
+            <div class="vocab-meaning">Boa tarde</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('Good evening')" data-word="Good evening">
+            <div class="vocab-word">Good evening</div>
+            <div class="vocab-meaning">Boa noite</div>
+        </div>o{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-hand-wave"></i> Cumprimentos & Apresentações</h2>
-<p style="margin-bottom: 1rem;">Clique nos cartões para ouvir a pronúncia:</p>
-<div class="vocabulary-grid">
-    <div class="vocab-card" onclick="speakText('Hello, nice to meet you')">
-        <div class="vocab-word">Hello / Hi</div>
-        <div class="vocab-meaning">Olá / Oi</div>
+<h2><i class="fas fa-volume-up"></i> Vocabulário Básico & Sistema de Áudio</h2>
+
+<div style="text-align: left; max-width: 900px;">
+    <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4CAF50; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem;">
+            <strong>🇧🇷 Como o áudio funciona:</strong> O sistema <strong>reproduz</strong> (Simple Present) palavras quando você <strong>clica</strong> (Simple Present).
+            Nós <strong>implementamos</strong> (Simple Past) esta funcionalidade para melhorar a pronúncia.
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #2d3748;">
+            <strong>🇺🇸 How the audio works:</strong> The system <strong>plays</strong> (Simple Present) words when you <strong>click</strong> (Simple Present).
+            We <strong>implemented</strong> (Simple Past) this feature to improve pronunciation.
+        </p>
     </div>
-    <div class="vocab-card" onclick="speakText('Good morning')">
-        <div class="vocab-word">Good morning</div>
-        <div class="vocab-meaning">Bom dia</div>
+
+    <div style="background: #2d3748; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; color: #e2e8f0; font-family: 'Courier New', monospace; animation: slideInUp 1s ease-out 0.5s both;">
+        <div style="color: #68d391; margin-bottom: 0.5rem;">## JavaScript Audio System Code</div>
+        <pre style="margin: 0; line-height: 1.5;"><code style="color: #e2e8f0;"><span style="color: #68d391;">// This function speaks English words aloud</span>
+<span style="color: #9f7efe;">function</span> <span style="color: #63b3ed;">speakText</span>(text) {
+    <span style="color: #68d391;">// The browser creates a new speech instance</span>
+    <span style="color: #9f7efe;">const</span> utterance = <span style="color: #9f7efe;">new</span> SpeechSynthesisUtterance(text);
+    
+    <span style="color: #68d391;">// We set English as the default language</span>
+    utterance.lang = <span style="color: #fbd38d;">'en-US'</span>;
+    utterance.rate = <span style="color: #f687b3;">0.8</span>;  <span style="color: #68d391;">// Slower for learning</span>
+    
+    <span style="color: #68d391;">// The system is playing the pronunciation</span>
+    speechSynthesis.speak(utterance);
+    
+    console.log(<span style="color: #fbd38d;">`User clicked: ${text}`</span>);
+}
+
+<span style="color: #68d391;">// Event listeners handle user interactions</span>
+document.querySelectorAll(<span style="color: #fbd38d;">'.vocab-card'</span>).forEach(card => {
+    card.addEventListener(<span style="color: #fbd38d;">'click'</span>, () => {
+        <span style="color: #68d391;">// This card was selected by the student</span>
+        <span style="color: #9f7efe;">const</span> word = card.getAttribute(<span style="color: #fbd38d;">'data-word'</span>);
+        speakText(word);
+    });
+});</code></pre>
     </div>
-    <div class="vocab-card" onclick="speakText('Good afternoon')">
-        <div class="vocab-word">Good afternoon</div>
-        <div class="vocab-meaning">Boa tarde</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+        <div style="animation: slideInLeft 1s ease-out 1s both;">
+            <h3 style="color: #4CAF50; margin-bottom: 1rem;"><i class="fas fa-microphone"></i> Vocabulário Interativo</h3>
+            <p style="margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Present Simple:</strong> "The system <strong>plays</strong> audio"<br>
+                <strong>Present Continuous:</strong> "Students <strong>are learning</strong> pronunciation"
+            </p>
+        </div>
+        
+        <div style="animation: slideInRight 1s ease-out 1.2s both;">
+            <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-code-branch"></i> Desenvolvimento</h3>
+            <p style="margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Past Simple:</strong> "We <strong>built</strong> this feature"<br>
+                "The team <strong>implemented</strong> speech synthesis"
+            </p>
+        </div>
     </div>
-    <div class="vocab-card" onclick="speakText('Good evening')">
-        <div class="vocab-word">Good evening</div>
-        <div class="vocab-meaning">Boa noite</div>
-    </div>
-    <div class="vocab-card" onclick="speakText('Nice to meet you')">
-        <div class="vocab-word">Nice to meet you</div>
-        <div class="vocab-meaning">Prazer em conhecê-lo</div>
-    </div>
-    <div class="vocab-card" onclick="speakText('How are you?')">
-        <div class="vocab-word">How are you?</div>
-        <div class="vocab-meaning">Como você está?</div>
+
+    <h3 style="color: #FFD700; margin: 2rem 0 1rem 0; text-align: center;"><i class="fas fa-headphones"></i> Clique para ouvir exemplos dos tempos verbais:</h3>
+    
+    <div class="vocabulary-grid">
+        <div class="vocab-card" onclick="speakText('I write code every day')" data-word="Simple Present">
+            <div class="vocab-word">Simple Present</div>
+            <div class="vocab-meaning">"I write code every day" / "Eu escrevo código todo dia"</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('She develops websites')" data-word="Simple Present 2">
+            <div class="vocab-word">Simple Present</div>
+            <div class="vocab-meaning">"She develops websites" / "Ela desenvolve sites"</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('I am programming now')" data-word="Present Continuous">
+            <div class="vocab-word">Present Continuous</div>
+            <div class="vocab-meaning">"I am programming now" / "Estou programando agora"</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('The system is processing data')" data-word="Present Continuous 2">
+            <div class="vocab-word">Present Continuous</div>
+            <div class="vocab-meaning">"The system is processing data" / "O sistema está processando dados"</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('We built this application')" data-word="Simple Past">
+            <div class="vocab-word">Simple Past</div>
+            <div class="vocab-meaning">"We built this application" / "Nós construímos esta aplicação"</div>
+        </div>
+        <div class="vocab-card" onclick="speakText('The team created ten lessons')" data-word="Simple Past 2">
+            <div class="vocab-word">Simple Past</div>
+            <div class="vocab-meaning">"The team created ten lessons" / "A equipe criou dez lições"</div>
+        </div>
     </div>
 </div>
 {% endblock %}

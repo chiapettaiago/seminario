@@ -1,26 +1,58 @@
 {% extends "base.html" %}
 
-{% block title %}Objetivos de Aprendizado{% endblock %}
+{% block title %}Como o Sistema Funciona{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-bullseye"></i> Objetivos de Aprendizado</h2>
-<div style="text-align: left; max-width: 600px;">
-    <div style="display: grid; gap: 1rem; margin-top: 2rem;">
-        <div style="display: flex; align-items: center; gap: 1rem; animation: slideInUp 1s ease-out 0.8s both;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <span>Dominar vocabulário essencial em inglês</span>
+<h2><i class="fas fa-code"></i> Como o Sistema Funciona / How the System Works</h2>
+<div style="text-align: left; max-width: 800px;">
+    <div style="background: rgba(255, 215, 0, 0.1); border-left: 4px solid #FFD700; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem;">
+            <strong>🇧🇷 Português:</strong> Nosso sistema <strong>utiliza Flask</strong> (Simple Present) e <strong>está processando</strong> (Present Continuous) dados em tempo real.
+            Este código <strong>foi desenvolvido</strong> (Simple Past) para ensinar inglês de forma interativa!
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #2d3748;">
+            <strong>🇺🇸 English:</strong> Our system <strong>uses Flask</strong> (Simple Present) and <strong>is processing</strong> (Present Continuous) data in real time.
+            This code <strong>was developed</strong> (Simple Past) to teach English interactively!
+        </p>
+    </div>
+    
+    <div style="background: #2d3748; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; color: #e2e8f0; font-family: 'Courier New', monospace; animation: slideInUp 1s ease-out 0.5s both;">
+        <div style="color: #68d391; margin-bottom: 0.5rem;">## Python Flask Application Code</div>
+        <pre style="margin: 0; line-height: 1.5;"><code style="color: #e2e8f0;"><span style="color: #9f7efe;">from</span> flask <span style="color: #9f7efe;">import</span> Flask, render_template
+
+<span style="color: #68d391;"># This system creates an interactive learning platform</span>
+app = Flask(__name__)
+
+<span style="color: #fbb6ce;">@app.route</span>(<span style="color: #fbd38d;">"/slide/&lt;int:slide_number&gt;"</span>)
+<span style="color: #9f7efe;">def</span> <span style="color: #63b3ed;">slide</span>(slide_number):
+    <span style="color: #68d391;"># The system processes each slide request</span>
+    <span style="color: #9f7efe;">if</span> slide_number &lt; <span style="color: #f687b3;">1</span> <span style="color: #9f7efe;">or</span> slide_number &gt; <span style="color: #f687b3;">10</span>:
+        <span style="color: #9f7efe;">return</span> redirect(url_for(<span style="color: #fbd38d;">'slide'</span>, slide_number=<span style="color: #f687b3;">1</span>))
+    
+    <span style="color: #68d391;"># We built this feature to track progress</span>
+    <span style="color: #9f7efe;">if</span> <span style="color: #fbd38d;">'user'</span> <span style="color: #9f7efe;">in</span> session:
+        update_user_progress(session[<span style="color: #fbd38d;">'user'</span>], slide_number)
+    
+    <span style="color: #9f7efe;">return</span> render_template(<span style="color: #fbd38d;">f'slides/slide{slide_number}.html'</span>)</code></pre>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+        <div style="animation: slideInLeft 1s ease-out 1s both;">
+            <h3 style="color: #4CAF50; margin-bottom: 1rem;"><i class="fas fa-play"></i> Simple Present & Present Continuous</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"This system <strong>creates</strong> lessons"</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"The app <strong>is processing</strong> data"</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"Users <strong>learn</strong> English daily"</li>
+            </ul>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; animation: slideInUp 1s ease-out 1s both;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <span>Compreender estruturas gramaticais básicas</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 1rem; animation: slideInUp 1s ease-out 1.2s both;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <span>Praticar habilidades de conversação</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 1rem; animation: slideInUp 1s ease-out 1.4s both;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <span>Desenvolver confiança na comunicação</span>
+        
+        <div style="animation: slideInRight 1s ease-out 1.2s both;">
+            <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-history"></i> Simple Past</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"We <strong>developed</strong> this platform"</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"The team <strong>built</strong> ten slides"</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"Students <strong>completed</strong> exercises"</li>
+            </ul>
         </div>
     </div>
 </div>
