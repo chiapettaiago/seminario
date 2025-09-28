@@ -8,27 +8,33 @@
     margin: 1rem 0 !important;
     color: #e2e8f0 !important;
     font-family: 'Courier New', monospace !important;
-    overflow-x: auto !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+    overflow: hidden !important; /* mantém tudo dentro da caixa */
 }
 
 .code-block pre {
     margin: 0 !important;
     line-height: 1.5 !important;
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+    white-space: pre !important; /* não quebra linhas; usa scroll horizontal */
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     font-size: 0.9rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch !important; /* inércia no mobile */
+    border-radius: inherit !important;
 }
 
 .code-block code {
     color: #e2e8f0 !important;
     font-family: 'Courier New', monospace !important;
     font-size: 0.9rem !important;
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
+    white-space: inherit !important; /* herda do pre */
+    display: inline-block !important;
+    min-width: 100% !important; /* garante que o código não quebre a caixa */
 }
 
 /* Responsive code blocks */
