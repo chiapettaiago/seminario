@@ -1,21 +1,123 @@
 {% extends "base.html" %}
 
-{% block title %}Quiz Rápido{% endblock %}
+{% block title %}Present Perfect em Ação{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-question-circle"></i> Quiz Rápido</h2>
-<div class="quiz-container">
-    <div class="question">
-        Qual é a forma correta de cumprimentar alguém pela manhã?
-        <p style="font-size: 0.9rem; color: #87CEEB; margin-top: 0.5rem;">
-            (What is the correct way to greet someone in the morning?)
+<h2><i class="fas fa-clock"></i> Present Perfect em Ação / Present Perfect in Action</h2>
+
+<div style="text-align: left; width: 100%;">
+    <div style="background: rgba(70, 130, 180, 0.1); border-left: 4px solid #4682B4; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: white;">
+            <strong>🇧🇷 Present Perfect:</strong> Conecta uma ação do passado com o presente. Estrutura: <strong>Have/Has + Past Participle</strong>
+            <br>Exemplo: "Eu <strong>tenho estudado</strong> inglês" = "I <strong>have studied</strong> English"
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: white;">
+            <strong>🇺🇸 Present Perfect:</strong> Connects a past action with the present. Structure: <strong>Have/Has + Past Participle</strong>
+            <br>Example: "I <strong>have worked</strong> here for 5 years" (still working now)
         </p>
     </div>
-    <div class="options">
-        <div class="option" onclick="selectAnswer(this, false)">Good night</div>
-        <div class="option" onclick="selectAnswer(this, true)">Good morning</div>
-        <div class="option" onclick="selectAnswer(this, false)">Good afternoon</div>
-        <div class="option" onclick="selectAnswer(this, false)">Goodbye</div>
+
+    <div style="background: #252830; padding: 2rem; border-radius: 16px; margin: 2rem 0; color: #f7f9fc; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%;">
+        <div style="animation: slideInLeft 1s ease-out 0.5s both;">
+            <h3 style="color: #4682B4; margin-bottom: 1rem;"><i class="fas fa-link"></i> Quando usar Present Perfect</h3>
+            <div style="background: #2f333d; padding: 1rem; border-radius: 8px;">
+                <ul style="list-style: none; padding: 0; margin: 0; color: #f7f9fc;">
+                    <li style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-check" style="color: #4682B4; margin-right: 0.5rem;"></i><strong>Experiência:</strong> "I have visited Japan"</li>
+                    <li style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-check" style="color: #4682B4; margin-right: 0.5rem;"></i><strong>Mudança:</strong> "The city has grown"</li>
+                    <li style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-check" style="color: #4682B4; margin-right: 0.5rem;"></i><strong>Conquista:</strong> "She has learned Python"</li>
+                    <li style="margin-bottom: 0; font-size: 0.9rem;"><i class="fas fa-check" style="color: #4682B4; margin-right: 0.5rem;"></i><strong>Ação não terminada:</strong> "I have lived here for 3 years"</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="animation: slideInRight 1s ease-out 0.7s both;">
+            <h3 style="color: #20B2AA; margin-bottom: 1rem;"><i class="fas fa-balance-scale"></i> Present Perfect vs Simple Past</h3>
+            <div style="background: #2f333d; padding: 1rem; border-radius: 8px;">
+                <p style="margin-bottom: 0.8rem; font-size: 0.9rem; color: #f7f9fc;">
+                    <strong style="color: #4682B4;">Present Perfect:</strong><br>
+                    "I <strong>have worked</strong> on many projects"<br>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">(experiência geral, sem tempo específico)</span>
+                </p>
+                <p style="margin-bottom: 0; font-size: 0.9rem; color: #f7f9fc;">
+                    <strong style="color: #20B2AA;">Simple Past:</strong><br>
+                    "I <strong>worked</strong> on this project <u>last year</u>"<br>
+                    <span style="font-size: 0.8rem; opacity: 0.8;">(ação específica no passado)</span>
+                </p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div style="background: #252830; padding: 2rem; border-radius: 16px; margin: 2rem 0; color: #f7f9fc; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);">
+        <h3 style="color: #FFD700; margin: 0 0 1.5rem 0; text-align: center;"><i class="fas fa-headphones"></i> Clique para ouvir exemplos de Present Perfect:</h3>
+        
+        <div class="vocabulary-grid">
+            <div class="vocab-card" onclick="speakText('I have completed the project')" data-word="completed" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Have Completed</div>
+                <div class="vocab-meaning">"I <strong>have completed</strong> the project" / "Eu completei o projeto"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('She has learned three languages')" data-word="learned" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Has Learned</div>
+                <div class="vocab-meaning">"She <strong>has learned</strong> three languages" / "Ela aprendeu três idiomas"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('We have built amazing software')" data-word="built" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Have Built</div>
+                <div class="vocab-meaning">"We <strong>have built</strong> amazing software" / "Nós construímos software incrível"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('They have worked here for years')" data-word="worked" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Have Worked</div>
+                <div class="vocab-meaning">"They <strong>have worked</strong> here for years" / "Eles trabalham aqui há anos"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('He has written excellent code')" data-word="written" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Has Written</div>
+                <div class="vocab-meaning">"He <strong>has written</strong> excellent code" / "Ele escreveu código excelente"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('I have never seen this error before')" data-word="seen" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Have Seen</div>
+                <div class="vocab-meaning">"I <strong>have never seen</strong> this error" / "Nunca vi este erro"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('The team has achieved great results')" data-word="achieved" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Has Achieved</div>
+                <div class="vocab-meaning">"The team <strong>has achieved</strong> great results" / "A equipe alcançou ótimos resultados"</div>
+            </div>
+            
+            <div class="vocab-card" onclick="speakText('She has become an expert developer')" data-word="become" style="background: #2f333d; color: #f7f9fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div class="vocab-word" style="color: #FFD700;">Has Become</div>
+                <div class="vocab-meaning">"She <strong>has become</strong> an expert" / "Ela se tornou uma especialista"</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; animation: slideInUp 1s ease-out 1.2s both;">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;"><i class="fas fa-key"></i> Palavras-chave do Present Perfect</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-clock" style="color: #4682B4; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Tempo indefinido:</strong><br>already, yet, ever, never</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-hourglass" style="color: #4682B4; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Duração:</strong><br>for, since, recently, lately</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-star" style="color: #4682B4; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Resultado presente:</strong><br>just, already, so far</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(70, 130, 180, 0.1); border-radius: 8px;">
+            <p style="color: white; font-size: 1rem; margin: 0;">
+                <i class="fas fa-lightbulb" style="color: #FFD700; margin-right: 0.5rem;"></i>
+                <strong>Dica:</strong> Use Present Perfect quando o tempo exato não é importante, mas o resultado ou experiência é relevante agora!
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

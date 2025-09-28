@@ -120,6 +120,85 @@
             cursor: pointer;
         }
 
+        .mobile-slide-bubble {
+            display: none;
+        }
+
+        .recording-alert {
+            position: fixed;
+            right: 2rem;
+            bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 380px;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.95) 0%, rgba(102, 126, 234, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            z-index: 9998;
+        }
+
+        .recording-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .recording-alert-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #FFD700;
+        }
+
+        .recording-alert-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .recording-alert-content strong {
+            font-size: 1rem;
+        }
+
+        .recording-alert-content span {
+            font-size: 0.9rem;
+            line-height: 1.35;
+            opacity: 0.85;
+        }
+
+        .recording-alert-close {
+            background: rgba(255, 255, 255, 0.18);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .recording-alert-close:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(1.05);
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -155,60 +234,120 @@
         }
 
         @media (max-width: 768px) {
+            :root {
+                --header-height: 82px;
+            }
+
+            .presentation-container {
+                padding-top: 1rem;
+                padding-bottom: calc(var(--header-height) + env(safe-area-inset-bottom, 0px));
+            }
+
             .header {
-                padding: 1rem 1.5rem;
+                top: auto;
+                bottom: 0;
+                padding: 0.75rem 1rem;
+                border-bottom: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.25);
+                border-radius: 16px 16px 0 0;
+                box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+                justify-content: center;
+                gap: 0.5rem;
             }
 
             .logo {
-                font-size: 1.4rem;
+                display: none;
+            }
+
+            .header-nav {
+                flex: 1;
             }
 
             .nav-menu {
-                position: fixed;
-                top: var(--header-height, 72px);
-                left: -100%;
-                flex-direction: column;
-                background: linear-gradient(130deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 60%, rgba(255, 179, 71, 0.9) 100%);
-                backdrop-filter: blur(20px);
+                position: static;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
                 width: 100%;
-                height: calc(100vh - var(--header-height, 72px));
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                transition: left 0.3s ease;
-                padding: 2rem 0;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                z-index: 9998;
-            }
-
-            .nav-menu.active {
-                left: 0;
+                background: transparent;
+                backdrop-filter: none;
+                height: auto;
+                overflow: visible;
+                padding: 0;
+                gap: 0.25rem;
+                box-shadow: none;
             }
 
             .nav-item {
-                margin: 0 2rem;
+                flex: 1;
+                margin: 0;
             }
 
             .nav-link {
-                display: block;
-                padding: 1rem 2rem;
-                text-align: left;
-                border-radius: 15px;
-                margin-bottom: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0.45rem 0.25rem;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                color: white;
+            }
+
+            .nav-link i {
+                font-size: 1.2rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.18);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .slide-counter {
+                display: none;
+            }
+
+            .mobile-slide-bubble {
+                position: fixed;
+                top: calc(1rem + env(safe-area-inset-top, 0px));
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.18);
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+                padding: 0.75rem 1.25rem;
+                border-radius: 35px;
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                font-weight: 600;
+                font-size: 0.9rem;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                z-index: 9999;
+            }
+
+            .mobile-slide-bubble i {
+                font-size: 1rem;
+                color: #FFD700;
             }
 
             .slide-content {
-                padding-bottom: 9rem;
+                padding-bottom: calc(var(--header-height) + 4rem);
                 margin-top: 1rem;
                 padding-top: 1rem;
             }
 
-            .menu-toggle {
-                display: flex;
-            }
-
-            .slide-counter {
-                font-size: 0.85rem;
-                padding: 0.6rem 1rem;
+            .recording-alert {
+                left: 1rem;
+                right: 1rem;
+                bottom: auto;
+                top: calc(4.5rem + env(safe-area-inset-top, 0px));
             }
         }
 
@@ -611,6 +750,26 @@
             {% endif %}
         </header>
 
+        {% if current_slide %}
+        <div class="mobile-slide-bubble">
+            <i class="fas fa-chalkboard"></i>
+            <span>{{ current_slide }} / 10</span>
+        </div>
+        {% endif %}
+
+        <div class="recording-alert" id="recording-alert" role="status" aria-live="polite">
+            <div class="recording-alert-icon">
+                <i class="fas fa-microphone"></i>
+            </div>
+            <div class="recording-alert-content">
+                <strong>Pratique em voz alta</strong>
+                <span>Ótimo! Em uma aplicação real, iniciaríamos a gravação. Enquanto isso, fale o diálogo em voz alta!</span>
+            </div>
+            <button type="button" class="recording-alert-close" id="recording-alert-close" aria-label="Fechar alerta">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>
+
         <div class="slides-container" id="slides-container">
             <div class="slide active">
                 <div class="slide-content">
@@ -654,6 +813,8 @@
 
     <script src="{{ url_for('static', filename='js/presentation.js') }}"></script>
     <script>
+        let recordingAlertTimeout;
+
         // Text-to-speech function
         function speakText(text) {
             if ('speechSynthesis' in window) {
@@ -679,7 +840,23 @@
 
         // Recording functionality
         function startRecording() {
-            alert('Ótimo! Em uma aplicação real, isso iniciaria a gravação de voz. Por enquanto, pratique falando o diálogo em voz alta!');
+            const alertBox = document.getElementById('recording-alert');
+
+            if (!alertBox) {
+                alert('Ótimo! Em uma aplicação real, isso iniciaria a gravação de voz. Por enquanto, pratique falando o diálogo em voz alta!');
+                return;
+            }
+
+            alertBox.classList.add('show');
+
+            if (recordingAlertTimeout) {
+                clearTimeout(recordingAlertTimeout);
+            }
+
+            recordingAlertTimeout = setTimeout(() => {
+                alertBox.classList.remove('show');
+                recordingAlertTimeout = null;
+            }, 6000);
         }
 
         // Reset presentation
@@ -691,6 +868,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
             const navMenu = document.getElementById('nav-menu');
+
+            const recordingAlert = document.getElementById('recording-alert');
+            const recordingAlertClose = document.getElementById('recording-alert-close');
+
+            if (recordingAlert && recordingAlertClose) {
+                recordingAlertClose.addEventListener('click', () => {
+                    recordingAlert.classList.remove('show');
+                    if (recordingAlertTimeout) {
+                        clearTimeout(recordingAlertTimeout);
+                        recordingAlertTimeout = null;
+                    }
+                });
+            }
 
             if (menuToggle && navMenu) {
                 menuToggle.addEventListener('click', function() {
