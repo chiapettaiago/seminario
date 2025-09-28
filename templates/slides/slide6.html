@@ -1,34 +1,108 @@
 {% extends "base.html" %}
 
-{% block title %}Frases Essenciais{% endblock %}
+{% block title %}Advérbios em Inglês{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-comments"></i> Frases Essenciais</h2>
-<p style="margin-bottom: 1rem;">Clique nos cartões para ouvir a pronúncia:</p>
-<div class="vocabulary-grid">
-    <div class="vocab-card" onclick="speakText('Excuse me')">
-        <div class="vocab-word">Excuse me</div>
-        <div class="vocab-meaning">Com licença</div>
+<h2><i class="fas fa-fast-forward"></i> Advérbios em Inglês / English Adverbs</h2>
+
+<div style="text-align: left; width: 100%;">
+    <div style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid #8A2BE2; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: white;">
+            <strong>🇧🇷 O que são advérbios:</strong> Palavras que modificam verbos, adjetivos ou outros advérbios. 
+            Eles respondem: <strong>como?</strong> (quickly), <strong>quando?</strong> (yesterday), <strong>onde?</strong> (here), <strong>quanto?</strong> (very)
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: white;">
+            <strong>🇺🇸 What are adverbs:</strong> Words that modify verbs, adjectives, or other adverbs.
+            They answer: <strong>how?</strong> (quickly), <strong>when?</strong> (yesterday), <strong>where?</strong> (here), <strong>how much?</strong> (very)
+        </p>
     </div>
-    <div class="vocab-card" onclick="speakText('Thank you')">
-        <div class="vocab-word">Thank you</div>
-        <div class="vocab-meaning">Obrigado(a)</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; width: 100%;">
+        <div style="animation: slideInLeft 1s ease-out 0.5s both;">
+            <h3 style="color: #8A2BE2; margin-bottom: 1rem;"><i class="fas fa-running"></i> Como formar advérbios</h3>
+            <div style="background: rgba(138, 43, 226, 0.1); padding: 1rem; border-radius: 8px;">
+                <p style="margin-bottom: 0.5rem; font-size: 0.95rem; color: white;">
+                    <strong>Regra geral:</strong> Adjetivo + <strong>-ly</strong><br>
+                    • quick → quick<strong>ly</strong> (rapidamente)<br>
+                    • careful → careful<strong>ly</strong> (cuidadosamente)<br>
+                    • easy → eas<strong>ily</strong> (facilmente)
+                </p>
+            </div>
+        </div>
+        
+        <div style="animation: slideInRight 1s ease-out 0.7s both;">
+            <h3 style="color: #FF69B4; margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle"></i> Advérbios irregulares</h3>
+            <div style="background: rgba(255, 105, 180, 0.1); padding: 1rem; border-radius: 8px;">
+                <p style="margin-bottom: 0; font-size: 0.95rem; color: white;">
+                    <strong>Não seguem a regra -ly:</strong><br>
+                    • good → <strong>well</strong> (bem)<br>
+                    • fast → <strong>fast</strong> (rapidamente)<br>
+                    • hard → <strong>hard</strong> (com força)
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="vocab-card" onclick="speakText('You are welcome')">
-        <div class="vocab-word">You're welcome</div>
-        <div class="vocab-meaning">De nada</div>
+
+    <h3 style="color: #8A2BE2; margin: 2rem 0 1rem 0; text-align: center;"><i class="fas fa-volume-up"></i> Clique nos cards para ouvir os advérbios:</h3>
+    
+    <div class="vocabulary-grid">
+        <div class="vocab-card" onclick="speakText('She speaks English fluently')" data-word="fluently">
+            <div class="vocab-word">Fluently</div>
+            <div class="vocab-meaning">"She speaks <strong>fluently</strong>" / "Ela fala fluentemente"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('He drives carefully')" data-word="carefully">
+            <div class="vocab-word">Carefully</div>
+            <div class="vocab-meaning">"He drives <strong>carefully</strong>" / "Ele dirige cuidadosamente"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('They arrived early')" data-word="early">
+            <div class="vocab-word">Early</div>
+            <div class="vocab-meaning">"They arrived <strong>early</strong>" / "Eles chegaram cedo"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('She works hard')" data-word="hard">
+            <div class="vocab-word">Hard</div>
+            <div class="vocab-meaning">"She works <strong>hard</strong>" / "Ela trabalha muito"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('The code runs fast')" data-word="fast">
+            <div class="vocab-word">Fast</div>
+            <div class="vocab-meaning">"The code runs <strong>fast</strong>" / "O código roda rapidamente"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('He answered correctly')" data-word="correctly">
+            <div class="vocab-word">Correctly</div>
+            <div class="vocab-meaning">"He answered <strong>correctly</strong>" / "Ele respondeu corretamente"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('She coded efficiently')" data-word="efficiently">
+            <div class="vocab-word">Efficiently</div>
+            <div class="vocab-meaning">"She coded <strong>efficiently</strong>" / "Ela programou eficientemente"</div>
+        </div>
+        
+        <div class="vocab-card" onclick="speakText('We tested thoroughly')" data-word="thoroughly">
+            <div class="vocab-word">Thoroughly</div>
+            <div class="vocab-meaning">"We tested <strong>thoroughly</strong>" / "Nós testamos minuciosamente"</div>
+        </div>
     </div>
-    <div class="vocab-card" onclick="speakText('I am sorry')">
-        <div class="vocab-word">I'm sorry</div>
-        <div class="vocab-meaning">Desculpe</div>
-    </div>
-    <div class="vocab-card" onclick="speakText('Could you help me?')">
-        <div class="vocab-word">Could you help me?</div>
-        <div class="vocab-meaning">Você poderia me ajudar?</div>
-    </div>
-    <div class="vocab-card" onclick="speakText('I do not understand')">
-        <div class="vocab-word">I don't understand</div>
-        <div class="vocab-meaning">Eu não entendo</div>
+
+    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; animation: slideInUp 1s ease-out 1.2s both;">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;"><i class="fas fa-lightbulb"></i> Posição dos Advérbios</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-arrow-right" style="color: #8A2BE2; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Após o verbo:</strong><br>"She works <u>efficiently</u>"</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-arrow-left" style="color: #8A2BE2; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Antes do verbo:</strong><br>"He <u>quickly</u> finished"</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-exclamation" style="color: #8A2BE2; font-size: 1.2rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0; color: white;"><strong>Início/fim:</strong><br>"<u>Yesterday</u> we coded"</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
