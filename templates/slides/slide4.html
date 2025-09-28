@@ -1,33 +1,67 @@
 {% extends "base.html" %}
 
-{% block title %}Gramática: Presente Simples{% endblock %}
+{% block title %}Gramática: Present Perfect{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-book-open"></i> Gramática: Presente Simples</h2>
-<div style="max-width: 700px;">
-    <h3>Estrutura: Sujeito + Verbo + Objeto</h3>
-    <p style="font-size: 1rem; margin-bottom: 1rem; color: #87CEEB;">
-        <i class="fas fa-info-circle"></i> O presente simples é usado para ações habituais ou fatos.
-    </p>
+<h2><i class="fas fa-clock"></i> Gramática: Present Perfect</h2>
+<div style="text-align: left; width: 100%;">
     
-    <div class="grammar-example">
-        <div class="example-sentence"><strong>I speak English.</strong></div>
-        <div class="example-translation">Eu falo inglês.</div>
+    <div style="background: rgba(135, 206, 235, 0.1); border-left: 4px solid #87CEEB; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem;">
+            <strong>🇧🇷 O que é Present Perfect:</strong> Conecta o passado com o presente. <strong>Nós temos desenvolvido</strong> (Present Perfect) este sistema desde janeiro.
+            É diferente do Simple Past porque o resultado <strong>ainda é relevante agora</strong>.
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #2d3748;">
+            <strong>🇺🇸 What is Present Perfect:</strong> It connects past with present. <strong>We have developed</strong> (Present Perfect) this system since January.
+            It's different from Simple Past because the result <strong>is still relevant now</strong>.
+        </p>
     </div>
-    
-    <div class="grammar-example">
-        <div class="example-sentence"><strong>She works in a hospital.</strong></div>
-        <div class="example-translation">Ela trabalha em um hospital.</div>
+
+    <h3 style="color: #87CEEB; margin: 2rem 0 1rem 0; text-align: center;"><i class="fas fa-project-diagram"></i> Estrutura: Have/Has + Past Participle</h3>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; width: 100%;">
+        <div style="animation: slideInLeft 1s ease-out 1s both;">
+            <h3 style="color: #4CAF50; margin-bottom: 1rem;"><i class="fas fa-check-double"></i> Present Perfect vs Simple Past</h3>
+            <div style="background: rgba(76, 175, 80, 0.1); padding: 1rem; border-radius: 8px;">
+                <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">
+                    <strong>Present Perfect:</strong><br>
+                    "We <strong>have built</strong> this system" (resultado ainda relevante)
+                </p>
+                <p style="margin-bottom: 0; font-size: 0.95rem;">
+                    <strong>Simple Past:</strong><br>
+                    "We <strong>built</strong> this system in 2023" (ação terminada no passado)
+                </p>
+            </div>
+        </div>
+        
+        <div style="animation: slideInRight 1s ease-out 1.2s both;">
+            <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-code"></i> Exemplos Técnicos</h3>
+            <div style="background: rgba(255, 107, 107, 0.1); padding: 1rem; border-radius: 8px;">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"I <strong>have written</strong> 10 functions"</li>
+                    <li style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"The system <strong>has processed</strong> 1000 users"</li>
+                    <li style="margin-bottom: 0; font-size: 0.9rem;"><i class="fas fa-arrow-right" style="color: #FFD700; margin-right: 0.5rem;"></i>"Students <strong>have learned</strong> English here"</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    
-    <div class="grammar-example">
-        <div class="example-sentence"><strong>They play football every weekend.</strong></div>
-        <div class="example-translation">Eles jogam futebol todo fim de semana.</div>
+
+    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; animation: slideInUp 1s ease-out 1.4s both;">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;"><i class="fas fa-graduation-cap"></i> Quando Usar Present Perfect</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-clock" style="color: #87CEEB; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0;"><strong>Experiência:</strong><br>"I have used Python"</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-chart-line" style="color: #87CEEB; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0;"><strong>Mudança:</strong><br>"The app has improved"</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px;">
+                <i class="fas fa-trophy" style="color: #87CEEB; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.9rem; margin: 0;"><strong>Conquista:</strong><br>"We have finished the project"</p>
+            </div>
+        </div>
     </div>
-    
-    <p style="margin-top: 1.5rem; font-size: 1.1rem;">
-        <i class="fas fa-lightbulb" style="color: #FFD700;"></i> 
-        Lembre-se: Adicione 's' ou 'es' aos verbos com he/she/it
-    </p>
 </div>
 {% endblock %}

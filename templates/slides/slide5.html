@@ -1,77 +1,196 @@
 {% extends "base.html" %}
 
-{% block title %}Exercício Interativo{% endblock %}
+{% block title %}Exercício Interativo: Simple Past{% endblock %}
 
 {% block content %}
-<h2><i class="fas fa-puzzle-piece"></i> Exercício Interativo</h2>
-<div class="interactive-exercise">
-    <h3>Complete a frase:</h3>
-    <p style="font-size: 1.1rem; margin: 0.5rem 0; color: #87CEEB;">
-        Arraste a palavra correta para completar a frase em inglês:
-    </p>
-    <p style="font-size: 1.3rem; margin: 1rem 0;">
-        "She _____ to school every day."
-    </p>
-    
-    <div class="drag-drop-area">
-        <div class="draggable-word" draggable="true" data-word="goes">goes</div>
-        <div class="draggable-word" draggable="true" data-word="go">go</div>
-        <div class="draggable-word" draggable="true" data-word="went">went</div>
+<h2><i class="fas fa-clock"></i> Exercício Interativo: Simple Past</h2>
+
+<div style="text-align: left; width: 100%;">
+    <div style="background: rgba(255, 107, 107, 0.03); border-left: 4px solid #FF6B6B; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: white;">
+            <strong>🇧🇷 Simple Past:</strong> Usado para ações que <strong>aconteceram</strong> e <strong>terminaram</strong> no passado.
+            Exemplo: "Eu <strong>estudei</strong> inglês ontem" / "I <strong>studied</strong> English yesterday"
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: white;">
+            <strong>🇺🇸 Simple Past:</strong> Used for actions that <strong>happened</strong> and <strong>finished</strong> in the past.
+            Example: "I <strong>studied</strong> English yesterday" / "We <strong>built</strong> this app last year"
+        </p>
     </div>
-    
-    <div class="drop-zone" id="answer-zone">
-        Arraste a resposta correta aqui
+
+    <div class="interactive-exercise" style="background: #252830; color: #f7f9fc;">
+        <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-puzzle-piece"></i> Complete as frases no Simple Past:</h3>
+        <p style="font-size: 1rem; margin: 1rem 0; color: #87CEEB;">
+            <i class="fas fa-hand-point-right"></i> Arraste a forma correta do verbo para completar cada frase:
+        </p>
+        
+        <!-- Exercício 1 -->
+        <div style="background: #2f333d; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+            <p style="font-size: 1.2rem; margin: 1rem 0; color: #FFD700;">
+                <strong>1.</strong> "Yesterday, I _____ a new programming language."
+            </p>
+            
+            <div class="drag-drop-area">
+                <div class="draggable-word" draggable="true" data-word="learned" data-exercise="1">learned</div>
+                <div class="draggable-word" draggable="true" data-word="learn" data-exercise="1">learn</div>
+                <div class="draggable-word" draggable="true" data-word="learning" data-exercise="1">learning</div>
+            </div>
+            
+            <div class="drop-zone" id="answer-zone-1" data-correct="learned">
+                Arraste a resposta aqui
+            </div>
+            
+            <div id="feedback-1" style="margin-top: 1rem; font-weight: 600;"></div>
+        </div>
+
+        <!-- Exercício 2 -->
+        <div style="background: #2f333d; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+            <p style="font-size: 1.2rem; margin: 1rem 0; color: #FFD700;">
+                <strong>2.</strong> "The team _____ the project last month."
+            </p>
+            
+            <div class="drag-drop-area">
+                <div class="draggable-word" draggable="true" data-word="finished" data-exercise="2">finished</div>
+                <div class="draggable-word" draggable="true" data-word="finish" data-exercise="2">finish</div>
+                <div class="draggable-word" draggable="true" data-word="finishes" data-exercise="2">finishes</div>
+            </div>
+            
+            <div class="drop-zone" id="answer-zone-2" data-correct="finished">
+                Arraste a resposta aqui
+            </div>
+            
+            <div id="feedback-2" style="margin-top: 1rem; font-weight: 600;"></div>
+        </div>
+
+        <!-- Exercício 3 -->
+        <div style="background: #2f333d; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+            <p style="font-size: 1.2rem; margin: 1rem 0; color: #FFD700;">
+                <strong>3.</strong> "She _____ to the office by bus."
+            </p>
+            
+            <div class="drag-drop-area">
+                <div class="draggable-word" draggable="true" data-word="went" data-exercise="3">went</div>
+                <div class="draggable-word" draggable="true" data-word="go" data-exercise="3">go</div>
+                <div class="draggable-word" draggable="true" data-word="goes" data-exercise="3">goes</div>
+            </div>
+            
+            <div class="drop-zone" id="answer-zone-3" data-correct="went">
+                Arraste a resposta aqui
+            </div>
+            
+            <div id="feedback-3" style="margin-top: 1rem; font-weight: 600;"></div>
+        </div>
+
+        <div style="background: rgba(76, 175, 80, 0.1); border: 2px solid #4CAF50; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; text-align: center;">
+            <h3 style="color: #4CAF50; margin-bottom: 1rem;"><i class="fas fa-lightbulb"></i> Dicas do Simple Past:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Verbos Regulares:</strong><br>work → work<strong>ed</strong></p>
+                </div>
+                <div>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Verbos Irregulares:</strong><br>go → <strong>went</strong></p>
+                </div>
+                <div>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Palavras-chave:</strong><br>yesterday, last, ago</p>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div id="feedback" style="margin-top: 1rem; font-weight: 600;"></div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-// Drag and drop functionality
+// Drag and drop functionality for Simple Past exercise
 function setupDragAndDrop() {
     const draggables = document.querySelectorAll('.draggable-word');
-    const dropZone = document.getElementById('answer-zone');
+    const dropZones = document.querySelectorAll('.drop-zone');
     
     draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', e.target.dataset.word);
+            e.dataTransfer.setData('exercise', e.target.dataset.exercise);
+            e.target.style.opacity = '0.5';
+        });
+        
+        draggable.addEventListener('dragend', (e) => {
+            e.target.style.opacity = '1';
         });
     });
     
-    if (dropZone) {
+    dropZones.forEach(dropZone => {
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            dropZone.style.borderColor = 'rgba(255, 215, 0, 0.8)';
-            dropZone.style.background = 'rgba(255, 215, 0, 0.1)';
+            dropZone.classList.add('drag-over');
         });
 
         dropZone.addEventListener('dragleave', (e) => {
-            dropZone.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-            dropZone.style.background = 'transparent';
+            dropZone.classList.remove('drag-over');
         });
         
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             const word = e.dataTransfer.getData('text/plain');
-            handleWordDrop(word, dropZone);
+            const exercise = e.dataTransfer.getData('exercise');
+            const dropZoneId = dropZone.id;
+            const expectedExercise = dropZoneId.split('-')[2]; // gets "1", "2", or "3"
+            
+            if (exercise === expectedExercise) {
+                handleWordDrop(word, dropZone);
+            }
+            dropZone.classList.remove('drag-over');
         });
-    }
+    });
 }
 
 function handleWordDrop(word, dropZone) {
-    const feedback = document.getElementById('feedback');
+    const correctAnswer = dropZone.dataset.correct;
+    const exerciseNum = dropZone.id.split('-')[2];
+    const feedback = document.getElementById(`feedback-${exerciseNum}`);
     
-    if (word === 'goes') {
-        dropZone.innerHTML = '<strong style="color: #4CAF50; font-size: 1.2rem;">goes ✓</strong>';
-        feedback.innerHTML = '<span style="color: #4CAF50; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Excelente! Gramática perfeita!</span>';
+    if (word === correctAnswer) {
+        dropZone.innerHTML = `<strong style="color: #4CAF50; font-size: 1.3rem;">${word} ✓</strong>`;
+        feedback.innerHTML = '<span style="color: #4CAF50; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Perfeito! Você dominou o Simple Past!</span>';
         feedback.style.animation = 'slideInUp 0.6s ease-out';
+        
+        // Play success sound (if available)
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance('Correct!');
+            utterance.lang = 'en-US';
+            utterance.volume = 0.3;
+            speechSynthesis.speak(utterance);
+        }
     } else {
-        dropZone.innerHTML = '<strong style="color: #f44336; font-size: 1.2rem;">' + word + ' ✗</strong>';
-        feedback.innerHTML = '<span style="color: #f44336; font-size: 1.1rem;"><i class="fas fa-times-circle"></i> Tente novamente! Lembre-se: she/he/it + verbo + s</span>';
+        dropZone.innerHTML = `<strong style="color: #f44336; font-size: 1.3rem;">${word} ✗</strong>`;
+        
+        let hint = '';
+        if (exerciseNum === '1') {
+            hint = 'Dica: "Yesterday" indica passado. Use "learned"!';
+        } else if (exerciseNum === '2') {
+            hint = 'Dica: "Last month" é passado. Use "finished"!';
+        } else if (exerciseNum === '3') {
+            hint = 'Dica: Verbo irregular "go" → "went" no passado!';
+        }
+        
+        feedback.innerHTML = `<span style="color: #f44336; font-size: 1rem;"><i class="fas fa-times-circle"></i> Tente novamente! ${hint}</span>`;
         feedback.style.animation = 'shake 0.5s ease-out';
+        
+        // Reset drop zone after 2 seconds
+        setTimeout(() => {
+            dropZone.innerHTML = 'Arraste a resposta aqui';
+            feedback.innerHTML = '';
+        }, 3000);
     }
 }
+
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+`;
+document.head.appendChild(style);
 
 // Initialize drag and drop when page loads
 document.addEventListener('DOMContentLoaded', setupDragAndDrop);
