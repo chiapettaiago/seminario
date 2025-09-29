@@ -26,7 +26,7 @@ app = Flask(__name__)
 <span style="color: #fbb6ce;">@app.route</span>(<span style="color: #fbd38d;">"/slide/&lt;int:slide_number&gt;"</span>)
 <span style="color: #9f7efe;">def</span> <span style="color: #63b3ed;">slide</span>(slide_number):
     <span style="color: #68d391;"># The system processes each slide request</span>
-    <span style="color: #9f7efe;">if</span> slide_number &lt; <span style="color: #f687b3;">1</span> <span style="color: #9f7efe;">or</span> slide_number &gt; <span style="color: #f687b3;">10</span>:
+    <span style="color: #9f7efe;">if</span> slide_number &lt; <span style="color: #f687b3;">1</span> <span style="color: #9f7efe;">or</span> slide_number &gt; <span style="color: #f687b3;">8</span>:
         <span style="color: #9f7efe;">return</span> redirect(url_for(<span style="color: #fbd38d;">'slide'</span>, slide_number=<span style="color: #f687b3;">1</span>))
     
     <span style="color: #68d391;"># We built this feature to track progress</span>

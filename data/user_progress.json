@@ -1,15 +1,25 @@
 {
   "chiapettaiago": {
     "completed_slides": [
-      1
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
     ],
     "quiz_scores": {},
-    "time_spent": 5,
-    "vocabulary_learned": 0,
+    "time_spent": 40,
+    "vocabulary_learned": 30,
     "achievements": [
+      "Vocabul\u00e1rio B\u00e1sico",
+      "Curso Finalizado",
+      "Quiz Master",
       "Primeiro Slide Completado"
     ],
-    "last_slide": 1,
+    "last_slide": 8,
     "study_streak": 1
   }
 }

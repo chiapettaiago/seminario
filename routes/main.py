@@ -15,12 +15,12 @@ def main():
 def slide(slide_number):
     """Renderiza um slide específico"""
     # Validar número do slide
-    if slide_number < 1 or slide_number > 10:
+    if slide_number < 1 or slide_number > 8:
         return redirect(url_for('slide', slide_number=1))
     
     # Calcular slides anterior e próximo
     prev_slide = slide_number - 1 if slide_number > 1 else None
-    next_slide = slide_number + 1 if slide_number < 10 else None
+    next_slide = slide_number + 1 if slide_number < 8 else None
     
     # Se o usuário estiver logado, atualizar progresso
     if 'user' in session:
@@ -41,16 +41,14 @@ def lessons():
     completed_slides = user_data['progress']['completed_slides']
     
     lessons_list = [
-        {'number': 1, 'title': 'Bem-vindos ao Curso de Inglês', 'description': 'Introdução ao curso', 'completed': 1 <= completed_slides},
-        {'number': 2, 'title': 'Objetivos de Aprendizado', 'description': 'Metas e expectativas', 'completed': 2 <= completed_slides},
-        {'number': 3, 'title': 'Vocabulário Básico', 'description': 'Palavras essenciais do dia a dia', 'completed': 3 <= completed_slides},
-        {'number': 4, 'title': 'Gramática: Presente Simples', 'description': 'Estruturas básicas do presente', 'completed': 4 <= completed_slides},
-        {'number': 5, 'title': 'Quiz Interativo', 'description': 'Teste seus conhecimentos', 'completed': 5 <= completed_slides},
-        {'number': 6, 'title': 'Frases Essenciais', 'description': 'Expressões importantes', 'completed': 6 <= completed_slides},
-        {'number': 7, 'title': 'Números e Cores', 'description': 'Vocabulário numérico e cromático', 'completed': 7 <= completed_slides},
-        {'number': 8, 'title': 'Exercício Interativo', 'description': 'Prática com drag and drop', 'completed': 8 <= completed_slides},
-        {'number': 9, 'title': 'Prática de Conversação', 'description': 'Diálogos e pronunciação', 'completed': 9 <= completed_slides},
-        {'number': 10, 'title': 'Parabéns!', 'description': 'Conclusão do curso', 'completed': 10 <= completed_slides}
+        {'number': 1, 'title': 'Bem-vindos ao Seminário de Inglês', 'description': 'Introdução ao seminário', 'completed': 1 <= completed_slides},
+        {'number': 2, 'title': 'Como o Sistema Funciona', 'description': 'Explicação do sistema de ensino', 'completed': 2 <= completed_slides},
+        {'number': 3, 'title': 'Vocabulário Básico & Sistema de Áudio', 'description': 'Palavras essenciais com pronunciação', 'completed': 3 <= completed_slides},
+        {'number': 4, 'title': 'Gramática: Present Perfect', 'description': 'Estruturas do Present Perfect', 'completed': 4 <= completed_slides},
+        {'number': 5, 'title': 'Exercício Interativo: Simple Past', 'description': 'Prática com drag and drop', 'completed': 5 <= completed_slides},
+        {'number': 6, 'title': 'Advérbios em Inglês', 'description': 'Advérbios importantes', 'completed': 6 <= completed_slides},
+        {'number': 7, 'title': 'Present Perfect em Ação', 'description': 'Present Perfect na prática', 'completed': 7 <= completed_slides},
+        {'number': 8, 'title': 'Conclusão do Seminário', 'description': 'Parabéns - Curso finalizado!', 'completed': 8 <= completed_slides}
     ]
     return render_template('lessons.html', lessons=lessons_list, user=user_data)
 

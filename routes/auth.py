@@ -180,15 +180,15 @@ def get_user_data(username):
     return {
         'name': username.title(),
         'level': 'Iniciante' if len(user_progress['completed_slides']) < 5 else 'Intermediário',
-        'courses_completed': 1 if len(user_progress['completed_slides']) >= 10 else 0,
+        'courses_completed': 1 if len(user_progress['completed_slides']) >= 8 else 0,
         'total_study_time': f"{user_progress['time_spent']} minutos",
         'streak_days': user_progress['study_streak'],
         'favorite_topics': ['Vocabulário', 'Gramática', 'Conversação'],
         'next_goal': 'Completar curso intermediário',
         'progress': {
             'completed_slides': len(user_progress['completed_slides']),
-            'total_slides': 10,
-            'completion_percentage': int((len(user_progress['completed_slides']) / 10) * 100),
+            'total_slides': 8,
+            'completion_percentage': int((len(user_progress['completed_slides']) / 8) * 100),
             'time_spent': f"{user_progress['time_spent']} minutos",
             'quiz_score': f"{sum(user_progress['quiz_scores'].values())}/{len(user_progress['quiz_scores']) * 10}" if user_progress['quiz_scores'] else "0/0",
             'vocabulary_learned': user_progress['vocabulary_learned'],
@@ -236,7 +236,7 @@ def update_user_progress(username, slide_number):
         achievements.add('Vocabulário Básico')
     if slide_number >= 9:
         achievements.add('Conversação Iniciante')
-    if len(user_progress['completed_slides']) >= 10:
+    if len(user_progress['completed_slides']) >= 8:
         achievements.add('Curso Finalizado')
     
     user_progress['achievements'] = list(achievements)
