@@ -1,4 +1,67 @@
 /* Additional responsive enhancements for English Presentation */
+/* Dark card reusable container and responsive grid helpers */
+.dark-card {
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.dark-card h3 {
+    line-height: 1.25;
+}
+
+.dark-card p,
+.dark-card li,
+.dark-card .vocab-meaning {
+    line-height: 1.55;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.card-grid-2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    width: 100% !important;
+}
+
+@media (max-width: 900px) {
+    .card-grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dark-card {
+        padding: 1rem !important; /* harmoniza com wrappers inline */
+    }
+    .dark-card h3 {
+        font-size: 1.05rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+    .dark-card p,
+    .dark-card li,
+    .dark-card .vocab-meaning {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dark-card {
+        padding: 0.85rem !important;
+        border-radius: 10px;
+    }
+    .dark-card h3 {
+        font-size: 1rem;
+    }
+    .dark-card p,
+    .dark-card li,
+    .dark-card .vocab-meaning {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
 
 /* Code block responsive styles */
 .code-block {
