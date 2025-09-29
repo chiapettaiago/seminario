@@ -4,6 +4,10 @@ class PresentationManager {
         this.setupTouchEvents();
         this.setupKeyboardNavigation();
         this.setupAnimations();
+        // Save progress immediately on load to avoid race conditions with the 5s interval
+        this.saveProgress();
+        // Intercept Home/Início link clicks to show the resume modal before navigating
+        this.setupHomeInterception();
     }
 
     // Touch/swipe support for mobile devices
@@ -56,7 +60,13 @@ class PresentationManager {
                     break;
                 case 'Home':
                     e.preventDefault();
-                    window.location.href = '/slide/1';
+                    // If there is progress beyond slide 1, show modal instead of hard navigating
+                    const saved = localStorage.getItem('presentationProgress');
+                    if (saved && saved !== '1' && window.location.pathname !== '/slide/1') {
+                        this.showResumeModal(saved);
+                    } else {
+                        window.location.href = '/slide/1';
+                    }
                     break;
                 case 'End':
                     e.preventDefault();
@@ -103,12 +113,60 @@ class PresentationManager {
 
     loadProgress() {
         const savedSlide = localStorage.getItem('presentationProgress');
-        if (savedSlide && savedSlide !== '1') {
-            const confirmResume = confirm(`Continuar do slide ${savedSlide}?`);
-            if (confirmResume) {
+        if (!savedSlide || savedSlide === '1') return;
+        this.showResumeModal(savedSlide);
+    }
+
+    showResumeModal(savedSlide) {
+        const overlay = document.getElementById('resume-modal-overlay');
+        const numberEl = document.getElementById('resume-slide-number');
+        const btnContinue = document.getElementById('resume-continue');
+        const btnReset = document.getElementById('resume-reset');
+
+        if (overlay && numberEl && btnContinue && btnReset) {
+            numberEl.textContent = savedSlide;
+
+            const openModal = () => {
+                overlay.classList.add('show');
+                overlay.setAttribute('aria-hidden', 'false');
+            };
+            const closeModal = () => {
+                overlay.classList.remove('show');
+                overlay.setAttribute('aria-hidden', 'true');
+            };
+
+            btnContinue.onclick = () => {
+                closeModal();
+                window.location.href = `/slide/${savedSlide}`;
+            };
+            btnReset.onclick = () => {
+                localStorage.removeItem('presentationProgress');
+                closeModal();
+                window.location.href = '/slide/1';
+            };
+
+            openModal();
+        } else {
+            const useConfirm = confirm(`Continuar do slide ${savedSlide}?`);
+            if (useConfirm) {
                 window.location.href = `/slide/${savedSlide}`;
             }
         }
+    }
+
+    setupHomeInterception() {
+        try {
+            const homeLinks = document.querySelectorAll('a[href="/slide/1"]');
+            homeLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const saved = localStorage.getItem('presentationProgress');
+                    if (saved && saved !== '1' && window.location.pathname !== '/slide/1') {
+                        e.preventDefault();
+                        this.showResumeModal(saved);
+                    }
+                });
+            });
+        } catch (_) {}
     }
 }
 
@@ -136,6 +194,16 @@ function speakTextWithVoice(text, voiceIndex = 0) {
 // Initialize presentation manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const presentationManager = new PresentationManager();
+    // Expose globally for template helpers to trigger modal
+    window.presentationManager = presentationManager;
+    window.showResumeModal = (saved) => {
+        const target = saved || localStorage.getItem('presentationProgress') || '1';
+        if (target && target !== '1') {
+            presentationManager.showResumeModal(target);
+        } else {
+            window.location.href = '/slide/1';
+        }
+    };
     
     // Auto-save progress every 5 seconds
     setInterval(() => {

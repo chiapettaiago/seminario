@@ -578,6 +578,128 @@
             }
         }
 
+        /* Resume Modal (themed & responsive) */
+        .resume-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000; /* above header (9999) */
+            padding: 1.5rem;
+        }
+
+        .resume-modal-overlay.show {
+            display: flex;
+        }
+
+        .resume-modal {
+            width: 100%;
+            max-width: 520px;
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.95) 0%, rgba(102, 126, 234, 0.95) 60%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 18px;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+            color: white;
+            overflow: hidden;
+        }
+
+        .resume-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .resume-modal-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+        }
+
+        .resume-modal-title i {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+        }
+
+        .resume-modal-close {
+            background: rgba(255, 255, 255, 0.18);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .resume-modal-close:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(1.05);
+        }
+
+        .resume-modal-body {
+            padding: 1.25rem 1.25rem 0.5rem;
+        }
+
+        .resume-modal-body p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .resume-modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .resume-btn {
+            flex: 1 1 auto;
+            min-width: 140px;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .resume-btn:active { transform: scale(0.98); }
+
+        .resume-btn-primary {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            box-shadow: 0 8px 24px rgba(255, 165, 0, 0.35);
+        }
+
+        .resume-btn-secondary {
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .resume-modal {
+                border-radius: 16px;
+            }
+            .resume-modal-actions { gap: 0.5rem; }
+            .resume-btn { min-width: 120px; }
+        }
+
         .grammar-example {
             background: rgba(255, 255, 255, 0.1);
             padding: 1.5rem;
@@ -790,6 +912,28 @@
             </div>
         </div>
 
+        <!-- Themed Resume Modal -->
+        <div class="resume-modal-overlay" id="resume-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title" aria-hidden="true">
+            <div class="resume-modal" role="document">
+                <div class="resume-modal-header">
+                    <div class="resume-modal-title" id="resume-modal-title">
+                        <i class="fas fa-rotate-right"></i>
+                        Retomar progresso?
+                    </div>
+                    <button type="button" class="resume-modal-close" id="resume-close" aria-label="Fechar">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="resume-modal-body">
+                    <p>Detectamos um progresso salvo. Deseja continuar do <strong>slide <span id="resume-slide-number">1</span></strong>?</p>
+                </div>
+                <div class="resume-modal-actions">
+                    <button type="button" class="resume-btn resume-btn-secondary" id="resume-reset">Começar do início</button>
+                    <button type="button" class="resume-btn resume-btn-primary" id="resume-continue">Continuar</button>
+                </div>
+            </div>
+        </div>
+
         {% if current_slide %}
         <!-- Botão de retroceder na esquerda -->
         <div class="nav-controls left">
@@ -873,6 +1017,13 @@
 
         // Reset presentation
         function resetPresentation() {
+            try {
+                const saved = localStorage.getItem('presentationProgress');
+                if (saved && saved !== '1' && window.location.pathname !== '/slide/1' && window.showResumeModal) {
+                    window.showResumeModal(saved);
+                    return;
+                }
+            } catch (_) {}
             window.location.href = "{{ url_for('slide', slide_number=1) }}";
         }
 
@@ -883,6 +1034,23 @@
 
             const recordingAlert = document.getElementById('recording-alert');
             const recordingAlertClose = document.getElementById('recording-alert-close');
+
+            // Resume modal close (in case user clicks close icon)
+            const resumeOverlay = document.getElementById('resume-modal-overlay');
+            const resumeClose = document.getElementById('resume-close');
+            if (resumeOverlay && resumeClose) {
+                resumeClose.addEventListener('click', () => {
+                    resumeOverlay.classList.remove('show');
+                    resumeOverlay.setAttribute('aria-hidden', 'true');
+                });
+                // Close when clicking outside the modal content
+                resumeOverlay.addEventListener('click', (e) => {
+                    if (e.target === resumeOverlay) {
+                        resumeOverlay.classList.remove('show');
+                        resumeOverlay.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
 
             if (recordingAlert && recordingAlertClose) {
                 recordingAlertClose.addEventListener('click', () => {
