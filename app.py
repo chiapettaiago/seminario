@@ -18,5 +18,5 @@ app.route("/register", methods=['GET', 'POST'])(register)
 app.route("/logout")(logout)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8325))
     app.run(host="0.0.0.0", port=port, debug=True)
