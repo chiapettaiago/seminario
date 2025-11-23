@@ -10,7 +10,7 @@
 - Persistence is hybrid: Users in MySQL (PyMySQL); learning progress in JSON (`data/user_progress.json`).
 
 ## Dev workflow
-- Python 3.12 (see `runtime.txt`). Install deps (`requirements.txt`) and run `python app.py`. Listens on `PORT` or 5000.
+- Python 3.12 (see `runtime.txt`). Install deps (`requirements.txt`) and run `python app.py`. Listens on `PORT` or 8325.
 - Env vars: `SECRET_KEY` (override default in `app.py`), `DATABASE_URL` (mysql://user:pass@host:port/db?requireSSL=true).
 - Deploy: `Procfile` uses `web: gunicorn app:app` (Heroku/Render-compatible). Ensure write perms for `data/`.
 

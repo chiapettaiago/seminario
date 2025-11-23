@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Conditional Sentences{% endblock %}
+
+{% block content %}
+<div style="text-align: left; width: 100%; max-width: 900px; margin: 0 auto;">
+    <h2><i class="fas fa-code-branch"></i> Conditional Sentences / Sentenças Condicionais</h2>
+    
+    <div style="background: rgba(255, 215, 0, 0.15); border-left: 4px solid #FFD700; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out; color: #f8fafc;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: #f8fafc;">
+            <strong>🇧🇷 Português:</strong> Condicionais expressam situações hipotéticas e suas consequências, como estruturas if-else na programação!
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #e2e8f0;">
+            <strong>🇺🇸 English:</strong> Conditionals express hypothetical situations and their consequences, like if-else structures in programming!
+        </p>
+    </div>
+
+    <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+        <!-- Zero Conditional -->
+        <div style="background: linear-gradient(135deg, rgba(76, 29, 149, 0.95), rgba(129, 140, 248, 0.8)); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #c4b5fd; animation: slideInLeft 1s ease-out; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #ede9fe; margin-bottom: 0.8rem;"><i class="fas fa-equals"></i> Zero Conditional - General Truth</h3>
+            <p style="margin-bottom: 0.5rem;"><strong>Structure:</strong> If + Present Simple, Present Simple</p>
+            <div class="code-block" style="margin-top: 1rem; background: rgba(15, 23, 42, 0.85); color: #f8fafc;">
+                <span style="color: #90cdf4;">If</span> you <span style="color: #fbd38d;">divide</span> by zero, the program <span style="color: #fbd38d;">crashes</span>.
+            </div>
+        </div>
+
+        <!-- First Conditional -->
+        <div style="background: linear-gradient(135deg, rgba(6, 95, 70, 0.95), rgba(16, 185, 129, 0.75)); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #34d399; animation: slideInRight 1s ease-out 0.2s both; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #d1fae5; margin-bottom: 0.8rem;"><i class="fas fa-forward"></i> First Conditional - Real Future</h3>
+            <p style="margin-bottom: 0.5rem;"><strong>Structure:</strong> If + Present Simple, will + verb</p>
+            <div class="code-block" style="margin-top: 1rem; background: rgba(15, 23, 42, 0.85); color: #f8fafc;">
+                <span style="color: #90cdf4;">If</span> you <span style="color: #fbd38d;">run</span> the tests, they <span style="color: #fbd38d;">will pass</span>.
+            </div>
+        </div>
+
+        <!-- Second Conditional -->
+        <div style="background: linear-gradient(135deg, rgba(180, 83, 9, 0.95), rgba(251, 146, 60, 0.75)); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #fdba74; animation: slideInLeft 1s ease-out 0.4s both; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #ffedd5; margin-bottom: 0.8rem;"><i class="fas fa-question"></i> Second Conditional - Hypothetical Present</h3>
+            <p style="margin-bottom: 0.5rem;"><strong>Structure:</strong> If + Past Simple, would + verb</p>
+            <div class="code-block" style="margin-top: 1rem; background: rgba(15, 23, 42, 0.85); color: #f8fafc;">
+                <span style="color: #90cdf4;">If</span> I <span style="color: #fbd38d;">had</span> more RAM, the system <span style="color: #fbd38d;">would run</span> faster.
+            </div>
+        </div>
+
+        <!-- Third Conditional -->
+        <div style="background: linear-gradient(135deg, rgba(136, 19, 55, 0.95), rgba(244, 63, 94, 0.75)); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #fecdd3; animation: slideInRight 1s ease-out 0.6s both; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #ffe4e6; margin-bottom: 0.8rem;"><i class="fas fa-history"></i> Third Conditional - Hypothetical Past</h3>
+            <p style="margin-bottom: 0.5rem;"><strong>Structure:</strong> If + Past Perfect, would have + Past Participle</p>
+            <div class="code-block" style="margin-top: 1rem; background: rgba(15, 23, 42, 0.85); color: #f8fafc;">
+                <span style="color: #90cdf4;">If</span> we <span style="color: #fbd38d;">had tested</span> the code, we <span style="color: #fbd38d;">would have found</span> the bug.
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(79, 70, 229, 0.6)); padding: 1.5rem; border-radius: 12px; animation: fadeIn 2s ease-out; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+        <h3 style="color: #c7d2fe; margin-bottom: 1rem;"><i class="fas fa-laptop-code"></i> Programming Analogy</h3>
+        <div class="code-block" style="background: rgba(15, 23, 42, 0.85); color: #f8fafc;">
+<span style="color: #f687b3;"># Zero Conditional = Always true condition</span>
+<span style="color: #90cdf4;">if</span> temperature > <span style="color: #fbd38d;">100</span>:
+    print(<span style="color: #a5f3fc;">"Water boils"</span>)
+
+<span style="color: #f687b3;"># First Conditional = Likely future scenario</span>
+<span style="color: #90cdf4;">if</span> user.login():
+    dashboard.display()
+
+<span style="color: #f687b3;"># Second Conditional = Unlikely/imaginary scenario</span>
+<span style="color: #90cdf4;">if</span> I_had_unlimited_budget:
+    build_perfect_system()
+
+<span style="color: #f687b3;"># Third Conditional = Past that didn't happen</span>
+<span style="color: #90cdf4;">if</span> we_had_used_version_control:
+    we_would_not_have_lost_code()
+        </div>
+    </div>
+</div>
+{% endblock %}

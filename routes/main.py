@@ -11,12 +11,17 @@ import hashlib
 LESSONS_DATA = [
     {'number': 1, 'title': 'Bem-vindos ao Seminário de Inglês', 'description': 'Introdução ao seminário'},
     {'number': 2, 'title': 'Como o Sistema Funciona', 'description': 'Explicação do sistema de ensino'},
-    {'number': 3, 'title': 'Vocabulário Básico & Sistema de Áudio', 'description': 'Palavras essenciais com pronunciação'},
+    {'number': 3, 'title': 'Vocabulário Básico & Sistema de Áudio', 'description': 'Palavras essenciais com pronúncia'},
     {'number': 4, 'title': 'Gramática: Present Perfect', 'description': 'Estruturas do Present Perfect'},
     {'number': 5, 'title': 'Exercício Interativo: Simple Past', 'description': 'Prática com drag and drop'},
     {'number': 6, 'title': 'Advérbios em Inglês', 'description': 'Advérbios importantes'},
     {'number': 7, 'title': 'Present Perfect em Ação', 'description': 'Present Perfect na prática'},
-    {'number': 8, 'title': 'Conclusão do Seminário', 'description': 'Parabéns - Curso finalizado!'}
+    {'number': 8, 'title': 'Prática de Conversação', 'description': 'Diálogo guiado e exercícios'},
+    {'number': 9, 'title': 'Expressões Idiomáticas', 'description': 'Frases e expressões comuns'},
+    {'number': 10, 'title': 'Revisão Geral', 'description': 'Consolidação de conteúdo'},
+    {'number': 11, 'title': 'Passive Voice - Voz Passiva', 'description': 'Gramática avançada: voz passiva'},
+    {'number': 12, 'title': 'Conditional Sentences', 'description': 'Sentenças condicionais em inglês'},
+    {'number': 13, 'title': 'Conclusão e Parabéns!', 'description': 'Parabéns - Curso finalizado!'}
 ]
 
 def main():
@@ -26,12 +31,12 @@ def main():
 def slide(slide_number):
     """Renderiza um slide específico"""
     # Validar número do slide
-    if slide_number < 1 or slide_number > 8:
+    if slide_number < 1 or slide_number > 13:
         return redirect(url_for('slide', slide_number=1))
     
     # Calcular slides anterior e próximo
     prev_slide = slide_number - 1 if slide_number > 1 else None
-    next_slide = slide_number + 1 if slide_number < 8 else None
+    next_slide = slide_number + 1 if slide_number < 13 else None
     
     # Se o usuário estiver logado, atualizar progresso
     if 'user' in session:

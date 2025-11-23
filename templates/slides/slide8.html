@@ -1,98 +1,172 @@
 {% extends "base.html" %}
 
-{% block title %}Conclusão do Seminário{% endblock %}
+{% block title %}Prática de Conversação{% endblock %}
 
 {% block content %}
-<div style="text-align: center; max-width: 800px; margin: 0 auto;">
-    <!-- Cabeçalho de Conclusão -->
-    <h1 style="color: #4CAF50; margin-bottom: 2rem;"><i class="fas fa-trophy"></i> Parabéns!</h1>
-    <h2 style="color: #FFD700; margin-bottom: 2rem;">🎓 Você completou o Seminário de Inglês!</h2>
+<h2><i class="fas fa-user-friends"></i> Prática de Conversação</h2>
+<div style="max-width: 700px; margin: 0 auto;">
+    <div class="grammar-example">
+        <h3 style="color: #87CEEB; margin-bottom: 1rem;">Diálogo de Exemplo</h3>
+        <div style="text-align: left; line-height: 2;">
+            <div><strong style="color: #FFD700;">Pessoa A:</strong> "Hello! How are you?"</div>
+            <div><strong style="color: #87CEEB;">Pessoa B:</strong> "Hi! I'm fine, thank you. And you?"</div>
+            <div><strong style="color: #FFD700;">Pessoa A:</strong> "I'm good too. Nice to meet you!"</div>
+            <div><strong style="color: #87CEEB;">Pessoa B:</strong> "Nice to meet you too!"</div>
+        </div>
+    </div>
     
-    <!-- Resumo do Aprendizado -->
-    <div style="background: rgba(76, 175, 80, 0.1); border: 2px solid #4CAF50; border-radius: 12px; padding: 2rem; margin: 2rem auto; text-align: center;">
-        <p style="font-size: 1.3rem; margin-bottom: 2rem; color: #f7f9fc;">
-            Durante essas <strong>8 lições</strong>, você desenvolveu habilidades fundamentais em inglês:
-        </p>
+    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+        <h3><i class="fas fa-microphone"></i> Grave Sua Prática!</h3>
+        <p>Pratique o diálogo acima e grave sua voz para ouvir sua pronúncia.</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px;">
-                <h3 style="color: #87CEEB; margin-bottom: 1rem;"><i class="fas fa-volume-up"></i> Vocabulário</h3>
-                <p>Palavras essenciais do dia a dia com sistema de pronúncia</p>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px;">
-                <h3 style="color: #FFD700; margin-bottom: 1rem;"><i class="fas fa-clock"></i> Gramática</h3>
-                <p>Present Perfect e Simple Past dominados</p>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px;">
-                <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-gamepad"></i> Interatividade</h3>
-                <p>Exercícios práticos e drag-and-drop</p>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px;">
-                <h3 style="color: #9f7efe; margin-bottom: 1rem;"><i class="fas fa-fast-forward"></i> Advérbios</h3>
-                <p>Expressões importantes para fluência</p>
-            </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <button id="start-recording-btn" style="background: #4CAF50; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-microphone"></i> Iniciar Gravação
+            </button>
+            <button id="stop-recording-btn" style="background: #f44336; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; display: none;">
+                <i class="fas fa-stop"></i> Parar Gravação
+            </button>
+            <button id="play-recording-btn" style="background: #2196F3; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; display: none;">
+                <i class="fas fa-play"></i> Reproduzir
+            </button>
         </div>
-    </div>
-    
-    <!-- Conquistas -->
-    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 12px; padding: 2rem; margin: 2rem auto;">
-        <h3 style="color: #FFD700; margin-bottom: 1.5rem;"><i class="fas fa-medal"></i> Suas Conquistas</h3>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
-            <span style="background: #4CAF50; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">✓ Primeiro Slide</span>
-            <span style="background: #2196F3; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">✓ Vocabulário Básico</span>
-            <span style="background: #FF9800; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">✓ Quiz Master</span>
-            <span style="background: #9C27B0; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">✓ Present Perfect Master</span>
-            <span style="background: #FFD700; color: #000; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">🏆 Curso Finalizado</span>
+        
+        <div id="recording-status" style="margin-top: 1rem; padding: 1rem; background: rgba(33, 150, 243, 0.1); border-left: 4px solid #2196F3; border-radius: 5px; display: none;">
+            <p style="margin: 0;"><i class="fas fa-circle" style="color: #f44336; animation: pulse 1s infinite;"></i> <span id="recording-time">0:00</span> - Gravando...</p>
         </div>
-    </div>
-    
-    <!-- Mensagem Motivacional -->
-    <div style="background: rgba(255, 107, 107, 0.1); border: 2px solid #FF6B6B; border-radius: 12px; padding: 2rem; margin: 2rem auto;">
-        <h3 style="color: #FF6B6B; margin-bottom: 1rem;"><i class="fas fa-rocket"></i> Continue Sua Jornada!</h3>
-        <p style="font-size: 1.1rem; line-height: 1.6;">
-            O aprendizado não para aqui! Continue praticando com:
-        </p>
-        <div style="text-align: left; margin: 1rem auto; max-width: 400px;">
-            <p>📚 Leia textos em inglês regularmente</p>
-            <p>🎬 Assista filmes com legendas em inglês</p>
-            <p>🗣️ Pratique conversação sempre que possível</p>
-            <p>📝 Escreva um diário em inglês</p>
-            <p>🎵 Ouça músicas e podcasts em inglês</p>
+        
+        <div id="recording-feedback" style="margin-top: 1rem; padding: 1rem; background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4CAF50; border-radius: 5px; display: none;">
+            <h4 style="margin: 0 0 0.5rem 0; color: #4CAF50;"><i class="fas fa-chart-line"></i> Análise da Gravação</h4>
+            <p style="margin: 0.5rem 0;"><strong>Duração:</strong> <span id="feedback-duration"></span> segundos</p>
+            <p style="margin: 0.5rem 0;"><strong>Pontuação:</strong> <span id="feedback-score"></span>/100</p>
+            <p style="margin: 0.5rem 0;"><strong>Feedback:</strong> <span id="feedback-message"></span></p>
         </div>
-    </div>
-    
-    <!-- Estatísticas Finais -->
-    <div style="background: rgba(135, 206, 235, 0.1); border: 2px solid #87CEEB; border-radius: 12px; padding: 2rem; margin: 2rem auto;">
-        <h3 style="color: #87CEEB; margin-bottom: 1rem;"><i class="fas fa-chart-bar"></i> Seu Progresso</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-            <div>
-                <div style="font-size: 2rem; color: #4CAF50; font-weight: bold;">8/8</div>
-                <div style="font-size: 0.9rem;">Lições Completas</div>
-            </div>
-            <div>
-                <div style="font-size: 2rem; color: #FFD700; font-weight: bold;">100%</div>
-                <div style="font-size: 0.9rem;">Progresso</div>
-            </div>
-            <div>
-                <div style="font-size: 2rem; color: #FF6B6B; font-weight: bold;">30+</div>
-                <div style="font-size: 0.9rem;">Palavras Aprendidas</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Mensagem Final -->
-    <div style="margin: 3rem auto; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
-        <h2 style="margin-bottom: 1rem;">🌟 Obrigado por participar!</h2>
-        <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 1.5rem;">
-            Você demonstrou dedicação e comprometimento ao completar este seminário. 
-            O inglês é uma ferramenta poderosa - use-a para alcançar seus objetivos!
-        </p>
-        <p style="font-size: 1.3rem; font-weight: bold; color: #FFD700;">
-            Keep learning, keep growing! 🚀
-        </p>
+        
+        <audio id="audio-playback" style="width: 100%; margin-top: 1rem; display: none;"></audio>
     </div>
 </div>
+
+<style>
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+</style>
+
+<script>
+let mediaRecorder;
+let audioChunks = [];
+let recordingStartTime;
+let timerInterval;
+let audioBlob;
+
+const startBtn = document.getElementById('start-recording-btn');
+const stopBtn = document.getElementById('stop-recording-btn');
+const playBtn = document.getElementById('play-recording-btn');
+const statusDiv = document.getElementById('recording-status');
+const feedbackDiv = document.getElementById('recording-feedback');
+const audioPlayback = document.getElementById('audio-playback');
+const recordingTime = document.getElementById('recording-time');
+
+startBtn.addEventListener('click', async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        
+        mediaRecorder.ondataavailable = (event) => {
+            audioChunks.push(event.data);
+        };
+        
+        mediaRecorder.onstop = async () => {
+            audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            audioPlayback.src = audioUrl;
+            audioPlayback.style.display = 'block';
+            playBtn.style.display = 'inline-block';
+            
+            // Calcular duração
+            const duration = Math.floor((Date.now() - recordingStartTime) / 1000);
+            
+            // Enviar para análise
+            await analyzeRecording(duration);
+            
+            // Parar todas as tracks do stream
+            stream.getTracks().forEach(track => track.stop());
+        };
+        
+        mediaRecorder.start();
+        recordingStartTime = Date.now();
+        
+        // UI updates
+        startBtn.style.display = 'none';
+        stopBtn.style.display = 'inline-block';
+        playBtn.style.display = 'none';
+        statusDiv.style.display = 'block';
+        feedbackDiv.style.display = 'none';
+        audioPlayback.style.display = 'none';
+        
+        // Timer
+        timerInterval = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            recordingTime.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+        
+    } catch (error) {
+        alert('Erro ao acessar o microfone. Verifique as permissões do navegador.');
+        console.error('Erro:', error);
+    }
+});
+
+stopBtn.addEventListener('click', () => {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        clearInterval(timerInterval);
+        
+        // UI updates
+        startBtn.style.display = 'inline-block';
+        stopBtn.style.display = 'none';
+        statusDiv.style.display = 'none';
+    }
+});
+
+playBtn.addEventListener('click', () => {
+    if (audioPlayback.paused) {
+        audioPlayback.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+    } else {
+        audioPlayback.pause();
+        playBtn.innerHTML = '<i class="fas fa-play"></i> Reproduzir';
+    }
+});
+
+audioPlayback.addEventListener('ended', () => {
+    playBtn.innerHTML = '<i class="fas fa-play"></i> Reproduzir';
+});
+
+async function analyzeRecording(duration) {
+    try {
+        const response = await fetch('/api/recording/analyze', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ duration })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('feedback-duration').textContent = data.duration;
+            document.getElementById('feedback-score').textContent = data.score;
+            document.getElementById('feedback-message').textContent = data.feedback;
+            feedbackDiv.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Erro ao analisar gravação:', error);
+    }
+}
+</script>
 {% endblock %}

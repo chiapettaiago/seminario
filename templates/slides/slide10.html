@@ -1,35 +1,98 @@
 {% extends "base.html" %}
 
-{% block title %}Parabéns!{% endblock %}
+{% block title %}Revisão Geral{% endblock %}
 
 {% block content %}
-<h1><i class="fas fa-trophy"></i> Parabéns!</h1>
-<div style="animation: slideInUp 1s ease-out 0.6s both;">
-    <p style="font-size: 1.3rem; margin-bottom: 2rem;">Você completou a apresentação de inglês!</p>
+<h2><i class="fas fa-clipboard-check"></i> Revisão Geral</h2>
+<div style="max-width: 700px; margin: 0 auto;">
     
-    <div style="display: grid; gap: 1rem; max-width: 500px;">
-        <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <div>Aprendeu vocabulário essencial</div>
+    <div style="background: rgba(255, 215, 0, 0.1); border-left: 4px solid #FFD700; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out; color: #f8fafc;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: #f8fafc;">
+            <strong>🇧🇷 Português:</strong> Vamos revisar os principais pontos aprendidos até agora!
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #e2e8f0;">
+            <strong>🇺🇸 English:</strong> Let's review the main points learned so far!
+        </p>
+    </div>
+
+    <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+        <!-- Vocabulário -->
+        <div style="background: linear-gradient(135deg, rgba(55, 65, 81, 0.85), rgba(79, 70, 229, 0.75)); padding: 1.5rem; border-radius: 12px; animation: slideInLeft 1s ease-out; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #c3dafe; margin-bottom: 1rem;"><i class="fas fa-book"></i> Vocabulário Essencial</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; font-size: 0.95rem; color: #f8fafc;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Greetings: Hello, Hi, Good morning</div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Numbers: One, Two, Three...</div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Colors: Red, Blue, Green...</div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Days: Monday, Tuesday...</div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Tech terms: Code, Debug, Deploy</div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 0.6rem 0.8rem; border-radius: 6px;">✓ Actions: Run, Test, Build</div>
+            </div>
         </div>
-        <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <div>Compreendeu gramática básica</div>
+
+        <!-- Gramática -->
+        <div style="background: linear-gradient(135deg, rgba(15, 118, 110, 0.85), rgba(5, 150, 105, 0.8)); padding: 1.5rem; border-radius: 12px; animation: slideInRight 1s ease-out 0.2s both; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #d1fae5; margin-bottom: 1rem;"><i class="fas fa-pen"></i> Estruturas Gramaticais</h3>
+            <div style="line-height: 1.8; font-size: 0.95rem; color: #f0fff4;">
+                <p style="margin-bottom: 0.6rem;"><strong>Simple Present:</strong> I write code every day.</p>
+                <p style="margin-bottom: 0.6rem;"><strong>Simple Past:</strong> I wrote a function yesterday.</p>
+                <p style="margin-bottom: 0.6rem;"><strong>Present Perfect:</strong> I have developed many apps.</p>
+                <p style="margin-bottom: 0.6rem;"><strong>Passive Voice:</strong> The code was written by the team.</p>
+                <p style="margin-bottom: 0;"><strong>Conditionals:</strong> If you test it, it will work.</p>
+            </div>
         </div>
-        <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px;">
-            <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 1.5rem;"></i>
-            <div>Praticou conversações</div>
+
+        <!-- Advérbios -->
+        <div style="background: rgba(251, 146, 60, 0.1); padding: 1.5rem; border-radius: 8px; animation: slideInLeft 1s ease-out 0.4s both; color: #f8fafc;">
+            <h3 style="color: #fb923c; margin-bottom: 1rem;"><i class="fas fa-forward"></i> Advérbios Importantes</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; font-size: 0.95rem; color: #e2e8f0;">
+                <div>Always - Sempre</div>
+                <div>Never - Nunca</div>
+                <div>Sometimes - Às vezes</div>
+                <div>Usually - Geralmente</div>
+                <div>Often - Frequentemente</div>
+                <div>Rarely - Raramente</div>
+            </div>
+        </div>
+
+        <!-- Expressões -->
+        <div style="background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.4)); padding: 1.5rem; border-radius: 12px; animation: slideInRight 1s ease-out 0.6s both; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);">
+            <h3 style="color: #f8fafc; margin-bottom: 1rem;"><i class="fas fa-comments"></i> Expressões Úteis</h3>
+            <div style="line-height: 1.8; font-size: 1rem; color: #f8fafc;">
+                <p style="margin-bottom: 0.5rem;">🗣️ "How are you?" - Como você está?</p>
+                <p style="margin-bottom: 0.5rem;">🗣️ "Nice to meet you" - Prazer em conhecê-lo</p>
+                <p style="margin-bottom: 0.5rem;">🗣️ "Thank you" - Obrigado</p>
+                <p style="margin-bottom: 0.5rem;">🗣️ "You're welcome" - De nada</p>
+                <p style="margin-bottom: 0;">🗣️ "Break the ice" - Quebrar o gelo</p>
+            </div>
         </div>
     </div>
-    
-    <p style="margin-top: 2rem; font-size: 1.1rem;">
-        Continue praticando e seu inglês vai melhorar a cada dia!
-    </p>
-    
-    <div style="margin-top: 2rem;">
-        <button onclick="resetPresentation()" style="background: #FFD700; color: #333; padding: 1rem 2rem; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">
-            <i class="fas fa-redo"></i> Reiniciar Apresentação
-        </button>
+
+    <div class="code-block" style="animation: slideInUp 1s ease-out 0.8s both; margin-bottom: 2rem;">
+        <div style="color: #68d391; margin-bottom: 0.5rem;">## Quick Quiz - Test Your Knowledge!</div>
+        <div style="color: #e2e8f0; font-family: 'Courier New', monospace; line-height: 1.8;">
+<span style="color: #f687b3;"># 1. What's the past tense of "write"?</span>
+<span style="color: #90cdf4;">Answer:</span> <span style="color: #fbd38d;">wrote</span>
+
+<span style="color: #f687b3;"># 2. Complete: "I ___ developed many apps."</span>
+<span style="color: #90cdf4;">Answer:</span> <span style="color: #fbd38d;">have</span>
+
+<span style="color: #f687b3;"># 3. What does "piece of cake" mean?</span>
+<span style="color: #90cdf4;">Answer:</span> <span style="color: #fbd38d;">Very easy / Muito fácil</span>
+
+<span style="color: #f687b3;"># 4. Translate: "The code is executed by Python"</span>
+<span style="color: #90cdf4;">Answer:</span> <span style="color: #fbd38d;">O código é executado pelo Python</span>
+        </div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15)); padding: 2rem; border-radius: 12px; text-align: center; animation: fadeIn 2s ease-out; color: #f8fafc;">
+        <h3 style="color: #c3dafe; margin-bottom: 1rem;"><i class="fas fa-trophy"></i> Você está indo muito bem!</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #e2e8f0;">
+            Você aprendeu vocabulário, gramática, expressões idiomáticas e muito mais. 
+            Continue assim e você dominará o inglês!
+        </p>
+        <p style="margin-top: 1rem; font-size: 1.2rem; color: #FFD700; font-weight: bold;">
+            Keep up the great work! 🌟
+        </p>
     </div>
 </div>
 {% endblock %}

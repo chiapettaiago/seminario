@@ -70,7 +70,7 @@ class PresentationManager {
                     break;
                 case 'End':
                     e.preventDefault();
-                    window.location.href = '/slide/10';
+                    window.location.href = '/slide/13';
                     break;
             }
         });

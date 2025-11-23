@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Passive Voice - Voz Passiva{% endblock %}
+
+{% block content %}
+<div style="text-align: left; width: 100%; max-width: 900px; margin: 0 auto;">
+    <h2><i class="fas fa-exchange-alt"></i> Passive Voice / Voz Passiva</h2>
+    
+    <div style="background: rgba(255, 215, 0, 0.1); border-left: 4px solid #FFD700; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; animation: fadeIn 1s ease-out; color: #f8fafc;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem; color: #f8fafc;">
+            <strong>🇧🇷 Português:</strong> A voz passiva é usada quando o foco está na ação ou no objeto que recebe a ação, não em quem a realiza.
+        </p>
+        <p style="margin-bottom: 0; font-size: 1.1rem; color: #e2e8f0;">
+            <strong>🇺🇸 English:</strong> The passive voice is used when the focus is on the action or the object receiving the action, not on who performs it.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <div style="background: linear-gradient(135deg, rgba(76, 81, 191, 0.95), rgba(129, 140, 248, 0.8)); padding: 1.5rem; border-radius: 12px; animation: slideInLeft 1s ease-out; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #e0e7ff; margin-bottom: 1rem;"><i class="fas fa-arrow-right"></i> Active Voice</h3>
+            <div style="font-size: 1rem; line-height: 1.8;">
+                <p><strong>Present:</strong><br>The developer <u>writes</u> the code.</p>
+                <p><strong>Past:</strong><br>The team <u>created</u> the software.</p>
+                <p style="margin-bottom: 0;"><strong>Future:</strong><br>They <u>will deploy</u> the app.</p>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(45, 212, 191, 0.5)); padding: 1.5rem; border-radius: 12px; animation: slideInRight 1s ease-out; color: #f8fafc; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+            <h3 style="color: #d1fae5; margin-bottom: 1rem;"><i class="fas fa-arrow-left"></i> Passive Voice</h3>
+            <div style="font-size: 1rem; line-height: 1.8;">
+                <p><strong>Present:</strong><br>The code <u>is written</u> by the developer.</p>
+                <p><strong>Past:</strong><br>The software <u>was created</u> by the team.</p>
+                <p style="margin-bottom: 0;"><strong>Future:</strong><br>The app <u>will be deployed</u>.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="code-block" style="animation: slideInUp 1s ease-out 0.5s both;">
+        <div style="color: #68d391; margin-bottom: 0.5rem;">## Passive Voice Structure</div>
+        <div style="color: #e2e8f0; font-family: 'Courier New', monospace; line-height: 1.8;">
+<span style="color: #f687b3;"># Structure: Subject + to be + Past Participle (+ by agent)</span>
+
+<span style="color: #90cdf4;">Active:</span>  Python <span style="color: #fbd38d;">executes</span> the script.
+<span style="color: #90cdf4;">Passive:</span> The script <span style="color: #fbd38d;">is executed</span> by Python.
+
+<span style="color: #90cdf4;">Active:</span>  The engineer <span style="color: #fbd38d;">fixed</span> the bug.
+<span style="color: #90cdf4;">Passive:</span> The bug <span style="color: #fbd38d;">was fixed</span> by the engineer.
+
+<span style="color: #90cdf4;">Active:</span>  AI <span style="color: #fbd38d;">will transform</span> the industry.
+<span style="color: #90cdf4;">Passive:</span> The industry <span style="color: #fbd38d;">will be transformed</span> by AI.
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(248, 113, 113, 0.6)); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #feb2b2; color: #fff5f5; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);">
+        <h3 style="color: #ffe4e6; margin-bottom: 1rem;"><i class="fas fa-lightbulb"></i> When to Use Passive Voice</h3>
+        <ul style="line-height: 2; font-size: 1.05rem;">
+            <li>When the action is more important than who did it</li>
+            <li>When the agent (doer) is unknown or obvious</li>
+            <li>In technical/scientific writing</li>
+            <li>To maintain formal tone</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 2rem; text-align: center; animation: fadeIn 2s ease-out;">
+        <p style="font-size: 1.2rem; color: #FFD700;">
+            <i class="fas fa-code"></i> Common in technical documentation and programming contexts!
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -100,7 +100,7 @@ Response:
 ### Get Lesson Content
 **GET** `/api/lessons/<lesson_number>/content`
 
-Returns the HTML content of a specific lesson slide.
+Returns the HTML content of a specific lesson slide (1-13).
 
 Response:
 ```json

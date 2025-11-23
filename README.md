@@ -59,6 +59,9 @@ seminario/
 | 8     | Exercício interativo avançado      | Cards com hotspots                     |
 | 9     | Prática de conversação             | Diálogo guiado                         |
 | 10    | Conclusão                          | Mensagem final e CTA                   |
+| 11    | Passive Voice - Voz Passiva        | Gramática avançada com exemplos técnicos |
+| 12    | Conditional Sentences              | Condicionais com analogias de programação |
+| 13    | Technical Vocabulary & False Friends | Vocabulário técnico e falsos cognatos   |
 
 ## Como Rodar Localmente
 1. Garanta Python 3.12 instalado (`runtime.txt` define a versão).
@@ -81,7 +84,7 @@ seminario/
    ```bash
    python app.py
    ```
-6. Acesse `http://localhost:5000`. Sem login, o usuário é levado ao Slide 1; com login, há acesso às páginas de lições, progresso e perfil.
+6. Acesse `http://localhost:8325`. Sem login, o usuário é levado ao Slide 1; com login, há acesso às páginas de lições, progresso e perfil.
 
 ## Persistência e Segurança
 - Usuários e progresso ficam em `data/users.json` e `data/user_progress.json`. Em produção, substitua por um banco real (PostgreSQL, MongoDB etc.).

@@ -54,7 +54,7 @@ def get_lessons():
 
 @api_bp.route('/lessons/<int:lesson_number>/content', methods=['GET'])
 def get_lesson_content(lesson_number):
-    if lesson_number < 1 or lesson_number > 8:
+    if lesson_number < 1 or lesson_number > 13:
         return jsonify({'error': 'Invalid lesson number'}), 404
         
     template_path = os.path.join(current_app.root_path, 'templates', 'slides', f'slide{lesson_number}.html')
@@ -87,7 +87,7 @@ def update_progress():
         return jsonify({'error': 'Missing slide_number'}), 400
     
     slide_number = data['slide_number']
-    if not isinstance(slide_number, int) or slide_number < 1 or slide_number > 8:
+    if not isinstance(slide_number, int) or slide_number < 1 or slide_number > 13:
         return jsonify({'error': 'Invalid slide_number'}), 400
         
     if 'user' in session:
@@ -155,3 +155,62 @@ def register():
 def logout():
     session.pop('user', None)
     return jsonify({'success': True, 'message': 'Logged out successfully'})
+
+@api_bp.route('/recording', methods=['POST'])
+def save_recording():
+    """Salva uma gravação de áudio do usuário"""
+    if 'audio' not in request.files:
+        return jsonify({'error': 'No audio file provided'}), 400
+    
+    audio_file = request.files['audio']
+    slide_number = request.form.get('slide_number', 'unknown')
+    
+    if audio_file.filename == '':
+        return jsonify({'error': 'Empty filename'}), 400
+    
+    # Criar diretório de gravações se não existir
+    recordings_dir = os.path.join(current_app.root_path, 'data', 'recordings')
+    os.makedirs(recordings_dir, exist_ok=True)
+    
+    # Gerar nome de arquivo único
+    timestamp = int(os.time.time() * 1000)
+    username = session.get('user', 'guest')
+    filename = f"{username}_slide{slide_number}_{timestamp}.webm"
+    filepath = os.path.join(recordings_dir, filename)
+    
+    # Salvar arquivo
+    audio_file.save(filepath)
+    
+    return jsonify({
+        'success': True,
+        'message': 'Recording saved successfully',
+        'filename': filename
+    }), 201
+
+@api_bp.route('/recording/analyze', methods=['POST'])
+def analyze_recording():
+    """Analisa uma gravação (simulação)"""
+    data = request.get_json()
+    
+    if not data or 'duration' not in data:
+        return jsonify({'error': 'Missing duration parameter'}), 400
+    
+    duration = data['duration']
+    
+    # Simulação de análise baseada na duração
+    if duration < 3:
+        feedback = "Tente falar um pouco mais!"
+        score = 50
+    elif duration < 8:
+        feedback = "Bom trabalho! Continue praticando."
+        score = 75
+    else:
+        feedback = "Excelente! Você está praticando bastante!"
+        score = 95
+    
+    return jsonify({
+        'success': True,
+        'feedback': feedback,
+        'score': score,
+        'duration': duration
+    })
