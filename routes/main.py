@@ -8,6 +8,17 @@ from routes.auth import (
 )
 import hashlib
 
+LESSONS_DATA = [
+    {'number': 1, 'title': 'Bem-vindos ao Seminário de Inglês', 'description': 'Introdução ao seminário'},
+    {'number': 2, 'title': 'Como o Sistema Funciona', 'description': 'Explicação do sistema de ensino'},
+    {'number': 3, 'title': 'Vocabulário Básico & Sistema de Áudio', 'description': 'Palavras essenciais com pronunciação'},
+    {'number': 4, 'title': 'Gramática: Present Perfect', 'description': 'Estruturas do Present Perfect'},
+    {'number': 5, 'title': 'Exercício Interativo: Simple Past', 'description': 'Prática com drag and drop'},
+    {'number': 6, 'title': 'Advérbios em Inglês', 'description': 'Advérbios importantes'},
+    {'number': 7, 'title': 'Present Perfect em Ação', 'description': 'Present Perfect na prática'},
+    {'number': 8, 'title': 'Conclusão do Seminário', 'description': 'Parabéns - Curso finalizado!'}
+]
+
 def main():
     # Redireciona para o primeiro slide
     return redirect(url_for('slide', slide_number=1))
@@ -40,16 +51,12 @@ def lessons():
     user_data = get_user_data(session['user'])
     completed_slides = user_data['progress']['completed_slides']
     
-    lessons_list = [
-        {'number': 1, 'title': 'Bem-vindos ao Seminário de Inglês', 'description': 'Introdução ao seminário', 'completed': 1 <= completed_slides},
-        {'number': 2, 'title': 'Como o Sistema Funciona', 'description': 'Explicação do sistema de ensino', 'completed': 2 <= completed_slides},
-        {'number': 3, 'title': 'Vocabulário Básico & Sistema de Áudio', 'description': 'Palavras essenciais com pronunciação', 'completed': 3 <= completed_slides},
-        {'number': 4, 'title': 'Gramática: Present Perfect', 'description': 'Estruturas do Present Perfect', 'completed': 4 <= completed_slides},
-        {'number': 5, 'title': 'Exercício Interativo: Simple Past', 'description': 'Prática com drag and drop', 'completed': 5 <= completed_slides},
-        {'number': 6, 'title': 'Advérbios em Inglês', 'description': 'Advérbios importantes', 'completed': 6 <= completed_slides},
-        {'number': 7, 'title': 'Present Perfect em Ação', 'description': 'Present Perfect na prática', 'completed': 7 <= completed_slides},
-        {'number': 8, 'title': 'Conclusão do Seminário', 'description': 'Parabéns - Curso finalizado!', 'completed': 8 <= completed_slides}
-    ]
+    lessons_list = []
+    for lesson in LESSONS_DATA:
+        lesson_copy = lesson.copy()
+        lesson_copy['completed'] = lesson['number'] <= completed_slides
+        lessons_list.append(lesson_copy)
+
     return render_template('lessons.html', lessons=lessons_list, user=user_data)
 
 @login_required
