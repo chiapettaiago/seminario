@@ -19,7 +19,7 @@ PROGRESS_FILE = 'data/user_progress.json'
 # Configuração de banco de dados para usuários
 DB_CONNECTION_URI = os.environ.get(
     'DATABASE_URL',
-    'mysql://root:YoegMgp8vVoNNpyHxx1SJvuByU4gKqan@x4rc9k.stackhero-network.com:4782/root?useSSL=true&requireSSL=true'
+    'mysql://api_seminario:NChdeLSBWwsAndNn@159.203.188.0/api_seminario'
 )
 
 
